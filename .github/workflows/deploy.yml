@@ -1,0 +1,49 @@
+name: Synchronisation automatique MongoDB → Vercel
+
+on:
+  # Déclenchement manuel depuis l'interface GitHub
+  workflow_dispatch:
+  
+  # Déclenchement automatique toutes les heures
+  schedule:
+    - cron: '0 * * * *'  # Toutes les heures
+    # Pour changer la fréquence :
+    # - cron: '*/30 * * * *'  # Toutes les 30 minutes
+    # - cron: '0 */6 * * *'   # Toutes les 6 heures
+    # - cron: '0 9,18 * * *'  # À 9h et 18h chaque jour
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Récupération du code
+        uses: actions/checkout@v3
+      
+      - name: 🐍 Installation de Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: 📦 Installation des dépendances
+        run: |
+          pip install pymongo certifi pandas
+      
+      - name: 🔍 Vérification des fichiers
+        run: |
+          pwd
+          ls -la
+      
+      - name: 🔄 Synchronisation depuis MongoDB
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: |
+          python sync_from_mongodb.py
+          mv ontologie_interactive.html index.html
+      
+      - name: 📤 Commit et push des changements
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add index.html
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Mise à jour automatique depuis MongoDB [$(date +'%Y-%m-%d %H:%M')]" && git push)

@@ -1,0 +1,34 @@
+label,type,connections
+Abstrait,"Résultat d’une opération intellectuelle qui permet notamment de généraliser plusieurs choses en réduisant leurs différences, pour ne garder que leurs propriétés communes.",
+Accidentel,"Caractère secondaire, qui n’est ni nécessaire ni immuable, lié au hasard et qui ne change rien à la nature d’une chose. La couleur des yeux est accidentelle.","Essentiel, Nécessité, Contingence"
+Acquis,"Ce que l'individu acquiert au fur et à mesure de son apprentissage et de son évolution sociale. Par exemple, la langue nécessite un apprentissage : elle est donc un acquis.",Inné
+Actuel,Ce qui est passé de l’état virtuel à l’existence réelle et effective.,Virtuel
+Artificiel,"Ce qui a besoin de l’intervention humaine pour advenir, qui ne contient pas en lui-même le principe de son existence et qui ne peut donc exister par lui-même. Un objet technique est par exemple le produit de la création humaine et n’est pas quelque chose de naturel.","Naturel, Positif"
+Cause,"Ce qui produit un effet, ce qui fait que des choses ou des êtres sont.",Fin
+Concret,"Ce qui se rapporte à la réalité telle qu’elle est appréhendée dans l’expérience, par le biais des sensations ou des perceptions.",Abstrait
+Contingence,"Ce qui relève de la contingence est ce qui aurait pu ne pas se produire. Est contingent ce qui n’est pas nécessaire, ce dont l’existence aurait pu être autrement.
+Exemple : L’existence humaine est contingente.","Nécessité, Essentiel, Accidentel"
+Contrainte,Force physique externe qui nous impose de faire quelque chose.,Obligation
+En droit,"Ce qui doit être, conformément à des principes logiques et rationnels ou à des lois établies dans le cadre d’une société. Ce qui est en droit peut ne pas correspondre à ce qui est en fait, c’est-à-dire à la réalité. Les discriminations à l’embauche sont par exemple condamnées en droit, mais elles peuvent pourtant exister en fait.",En fait
+En fait,"Ce qui existe, c'est-à-dire la réalité. Ce qui est n’est pas nécessairement légitime : ce n’est pas parce que les inégalités existent qu’elles sont légitimes, en ce sens qu’elles seraient justifiées, ou qu’elles sont légales, en ce sens qu’elles seraient autorisées par la loi. Ce qui existe peut en effet provenir du hasard et ne pas avoir été anticipé ou souhaité tel qu’il est. Ce qui existe en fait s’oppose à ce qui doit exister en droit.","En droit, Positif"
+Essentiel,"Ce qui est nécessaire et immuable, c’est-à-dire qui ne peut pas ne pas être. Par exemple, la pensée est essentielle à l’être humain.","Accidentel, Nécessité, Contingence"
+Fin,"Ce qui constitue à la fois la limite d’une durée, et l’objectif de quelque chose. Elle s’oppose au moyen, qui correspond à l’action mise en oeuvre pour faire advenir la fin poursuivie.",Cause
+Formel,"Ce qui est relatif à la forme et qui permet de reconnaître une chose.
+",
+Général,"Ce qui vaut pour la majorité, et qui peut ne pas s’appliquer à tous. Est général ce qui se rapporte à la majorité des individus ou des objets ; c’est ce qui est le fait de tous ou ce qui concerne le Tout, mais qui peut souffrir d’exception.","Singulier, Particulier, Universel"
+Idéal,"L’idéal correspond à l’idée la plus parfaite que nous pouvons avoir de quelque chose. Il relève du monde des idées et non de la réalité ; il peut s’agir d’un modèle vers lequel tendre, d’un guide pour l’action.",Réel
+Inné,"Ce qui est naturellement présent, dès la naissance chez un individu. Il peut s’agir du patrimoine génétique.",Acquis
+Légal,"Ce qui est conforme à la loi, c'est-à-dire ce qui correspond aux dispositions inscrites dans les textes de loi. Un comportement est légal lorsqu’il est réalisé en conformité avec le droit.",Légitime
+Légitime,"Ce qui est considéré comme juste au regard de l’éthique ou de la morale, ou des attentes sociales. Un comportement peut paraître légitime sans pour autant être légal (voler pour se nourrir), et à l’inverse, un comportement peut être légal sans pour autant paraître légitime (il est légal de se déplacer en avion pour des trajets courts, mais ce comportement est perçu comme étant de moins en moins légitime).",Légal
+Matériel,Ce qui est relatif à la matière et qui constitue le support ou le contenu d’une chose.,Formel
+Naturel,"Ce qui dépend de la nature ou de l’état de nature et qui ne relève pas d’une construction humaine. Le naturel ne découle pas d’une convention : il n’est pas artificiel, ce n’est pas un artefact. 
+Ce qui n’a pas besoin de l’intervention humaine pour advenir, qui contient en lui-même le principe de son existence.",Positif
+Nécessité,"Ce qui relève de la nécessité est ce qui ne peut pas ne pas se produire. Ce qui est nécessaire, c'est ce à quoi on ne peut échapper. 
+Exemple : La loi de la gravité est nécessaire et n’aurait pas pu être autre que ce qu’elle est.",Contingence
+Obligation,Fait de s'imposer à soi-même une norme à suivre. L’obligation est une force intérieure qui provient de nous-mêmes : elle est morale.,Contrainte
+Particulier,"Ce qui vaut pour un groupe. Est particulier ce qui appartient à un ensemble de personnes ou de choses, comme une qualité. Par exemple, quelques individus ont les cheveux blonds. Une particularité n’est pas une singularité, puisqu’elle peut concerner un groupe d’individus, et non pas un seul individu.","Général, Singulier, Universel"
+Positif,"Ce qui dépend de l’action humaine, ce qui découle d’une convention et non de la nature. En revanche, il est possible de consolider un droit naturel par le droit positif, mais alors le droit naturel devient artificiel.",Naturel
+Réel,"Le réel correspond à ce qui existe effectivement, de manière autonome et qui n’est pas simplement idéal, fictif ou illusoire. Il se distingue de l’idéal en ce qu’il n’est pas un produit de la pensée.",Idéal
+Singulier,"Ce qui vaut pour un seul. Est singulier ce qui se distingue, ce qui est unique ou qu’on peut considérer de manière isolée. Est singulier ce qui est indépendant de toute autre chose. Par exemple, Socrate est singulier, c’est un seul individu.","Particulier, Universel, Singulier, Général"
+Universel,"Ce qui vaut pour tous, sans exception. Est universel ce qui s’étend à tout ce qui existe, c'est-à-dire à la totalité des êtres et des choses. Par exemple, tous les hommes sont mortels, pas uniquement Socrate. Il s’agit d’une règle universelle, à laquelle aucun être humain, ni aucun être vivant ne peut déroger.","Singulier, Particulier, Général"
+Virtuel,"Ce qui possède en soi toutes les possibilités de réalisation. La graine d’une plante est une plante virtuelle : la plante n’est pas encore actualisée, elle n’est qu’à l’état virtuel.",Actuel

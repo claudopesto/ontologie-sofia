@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notions pour penser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 0.9rem;
+            margin: 5px 0 0 0;
+            color: #666;
+            font-weight: normal;
+        }
+        #logo {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            height: 60px;
+            width: auto;
+            z-index: 200;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        #network {
+            width: 100%;
+            height: calc(100vh - 70px);
+        }
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 20px;
+            display: none;
+            z-index: 1000;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+        #popup-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:active {
+            background: #0056b3;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+        @media (min-width: 768px) {
+            header {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+            }
+            #logo {
+                height: 80px;
+                top: 15px;
+                right: 15px;
+            }
+            #popup {
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="sofia_logo.png" alt="Sofia Logo">
+    <header>
+        <div>
+            <h1>Notions pour penser</h1>
+            <h2>Découvrez les notions philosophiques interactives</h2>
+        </div>
+    </header>
+    <div id="network"></div>
+    <div id="overlay" onclick="hidePopup()"></div>
+    <div id="popup">
+        <p id="popup-content"></p>
+        <button onclick="hidePopup()">Fermer</button>
+    </div>
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([{"id": 0, "label": "Abstrait", "title": "Résultat d’une opération intellectuelle qui permet notamment de généraliser plusieurs choses en réduisant leurs différences, pour ne garder que leurs propriétés communes.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 1, "label": "Accidentel", "title": "Caractère secondaire, qui n’est ni nécessaire ni immuable, lié au hasard et qui ne change rien à la nature d’une chose. La couleur des yeux est accidentelle.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 2, "label": "Acquis", "title": "Ce que l'individu acquiert au fur et à mesure de son apprentissage et de son évolution sociale. Par exemple, la langue nécessite un apprentissage : elle est donc un acquis.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 3, "label": "Actuel", "title": "Ce qui est passé de l’état virtuel à l’existence réelle et effective.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 4, "label": "Artificiel", "title": "Ce qui a besoin de l’intervention humaine pour advenir, qui ne contient pas en lui-même le principe de son existence et qui ne peut donc exister par lui-même. Un objet technique est par exemple le produit de la création humaine et n’est pas quelque chose de naturel.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 5, "label": "Cause", "title": "Ce qui produit un effet, ce qui fait que des choses ou des êtres sont.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 6, "label": "Concret", "title": "Ce qui se rapporte à la réalité telle qu’elle est appréhendée dans l’expérience, par le biais des sensations ou des perceptions.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 7, "label": "Contingence", "title": "Ce qui relève de la contingence est ce qui aurait pu ne pas se produire. Est contingent ce qui n’est pas nécessaire, ce dont l’existence aurait pu être autrement.\nExemple : L’existence humaine est contingente.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 8, "label": "Contrainte", "title": "Force physique externe qui nous impose de faire quelque chose.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 9, "label": "En droit", "title": "Ce qui doit être, conformément à des principes logiques et rationnels ou à des lois établies dans le cadre d’une société. Ce qui est en droit peut ne pas correspondre à ce qui est en fait, c’est-à-dire à la réalité. Les discriminations à l’embauche sont par exemple condamnées en droit, mais elles peuvent pourtant exister en fait.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 10, "label": "En fait", "title": "Ce qui existe, c'est-à-dire la réalité. Ce qui est n’est pas nécessairement légitime : ce n’est pas parce que les inégalités existent qu’elles sont légitimes, en ce sens qu’elles seraient justifiées, ou qu’elles sont légales, en ce sens qu’elles seraient autorisées par la loi. Ce qui existe peut en effet provenir du hasard et ne pas avoir été anticipé ou souhaité tel qu’il est. Ce qui existe en fait s’oppose à ce qui doit exister en droit.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 11, "label": "Essentiel", "title": "Ce qui est nécessaire et immuable, c’est-à-dire qui ne peut pas ne pas être. Par exemple, la pensée est essentielle à l’être humain.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 12, "label": "Fin", "title": "Ce qui constitue à la fois la limite d’une durée, et l’objectif de quelque chose. Elle s’oppose au moyen, qui correspond à l’action mise en oeuvre pour faire advenir la fin poursuivie.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 13, "label": "Formel", "title": "Ce qui est relatif à la forme et qui permet de reconnaître une chose.\n", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 14, "label": "Général", "title": "Ce qui vaut pour la majorité, et qui peut ne pas s’appliquer à tous. Est général ce qui se rapporte à la majorité des individus ou des objets ; c’est ce qui est le fait de tous ou ce qui concerne le Tout, mais qui peut souffrir d’exception.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 15, "label": "Idéal", "title": "L’idéal correspond à l’idée la plus parfaite que nous pouvons avoir de quelque chose. Il relève du monde des idées et non de la réalité ; il peut s’agir d’un modèle vers lequel tendre, d’un guide pour l’action.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 16, "label": "Inné", "title": "Ce qui est naturellement présent, dès la naissance chez un individu. Il peut s’agir du patrimoine génétique.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 17, "label": "Légal", "title": "Ce qui est conforme à la loi, c'est-à-dire ce qui correspond aux dispositions inscrites dans les textes de loi. Un comportement est légal lorsqu’il est réalisé en conformité avec le droit.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 18, "label": "Légitime", "title": "Ce qui est considéré comme juste au regard de l’éthique ou de la morale, ou des attentes sociales. Un comportement peut paraître légitime sans pour autant être légal (voler pour se nourrir), et à l’inverse, un comportement peut être légal sans pour autant paraître légitime (il est légal de se déplacer en avion pour des trajets courts, mais ce comportement est perçu comme étant de moins en moins légitime).", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 19, "label": "Matériel", "title": "Ce qui est relatif à la matière et qui constitue le support ou le contenu d’une chose.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 20, "label": "Naturel", "title": "Ce qui dépend de la nature ou de l’état de nature et qui ne relève pas d’une construction humaine. Le naturel ne découle pas d’une convention : il n’est pas artificiel, ce n’est pas un artefact. \nCe qui n’a pas besoin de l’intervention humaine pour advenir, qui contient en lui-même le principe de son existence.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 21, "label": "Nécessité", "title": "Ce qui relève de la nécessité est ce qui ne peut pas ne pas se produire. Ce qui est nécessaire, c'est ce à quoi on ne peut échapper. \nExemple : La loi de la gravité est nécessaire et n’aurait pas pu être autre que ce qu’elle est.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 22, "label": "Obligation", "title": "Fait de s'imposer à soi-même une norme à suivre. L’obligation est une force intérieure qui provient de nous-mêmes : elle est morale.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 23, "label": "Particulier", "title": "Ce qui vaut pour un groupe. Est particulier ce qui appartient à un ensemble de personnes ou de choses, comme une qualité. Par exemple, quelques individus ont les cheveux blonds. Une particularité n’est pas une singularité, puisqu’elle peut concerner un groupe d’individus, et non pas un seul individu.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 24, "label": "Positif", "title": "Ce qui dépend de l’action humaine, ce qui découle d’une convention et non de la nature. En revanche, il est possible de consolider un droit naturel par le droit positif, mais alors le droit naturel devient artificiel.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 25, "label": "Réel", "title": "Le réel correspond à ce qui existe effectivement, de manière autonome et qui n’est pas simplement idéal, fictif ou illusoire. Il se distingue de l’idéal en ce qu’il n’est pas un produit de la pensée.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 26, "label": "Singulier", "title": "Ce qui vaut pour un seul. Est singulier ce qui se distingue, ce qui est unique ou qu’on peut considérer de manière isolée. Est singulier ce qui est indépendant de toute autre chose. Par exemple, Socrate est singulier, c’est un seul individu.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 27, "label": "Universel", "title": "Ce qui vaut pour tous, sans exception. Est universel ce qui s’étend à tout ce qui existe, c'est-à-dire à la totalité des êtres et des choses. Par exemple, tous les hommes sont mortels, pas uniquement Socrate. Il s’agit d’une règle universelle, à laquelle aucun être humain, ni aucun être vivant ne peut déroger.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 28, "label": "Virtuel", "title": "Ce qui possède en soi toutes les possibilités de réalisation. La graine d’une plante est une plante virtuelle : la plante n’est pas encore actualisée, elle n’est qu’à l’état virtuel.", "color": "#7c81fd", "font": {"color": "#333"}}]);
+        var edges = new vis.DataSet([{"from": 1, "to": 11}, {"from": 1, "to": 21}, {"from": 1, "to": 7}, {"from": 2, "to": 16}, {"from": 3, "to": 28}, {"from": 4, "to": 20}, {"from": 4, "to": 24}, {"from": 5, "to": 12}, {"from": 6, "to": 0}, {"from": 7, "to": 21}, {"from": 7, "to": 11}, {"from": 7, "to": 1}, {"from": 8, "to": 22}, {"from": 9, "to": 10}, {"from": 10, "to": 9}, {"from": 10, "to": 24}, {"from": 11, "to": 1}, {"from": 11, "to": 21}, {"from": 11, "to": 7}, {"from": 12, "to": 5}, {"from": 14, "to": 26}, {"from": 14, "to": 23}, {"from": 14, "to": 27}, {"from": 15, "to": 25}, {"from": 16, "to": 2}, {"from": 17, "to": 18}, {"from": 18, "to": 17}, {"from": 19, "to": 13}, {"from": 20, "to": 24}, {"from": 21, "to": 7}, {"from": 22, "to": 8}, {"from": 23, "to": 14}, {"from": 23, "to": 26}, {"from": 23, "to": 27}, {"from": 24, "to": 20}, {"from": 25, "to": 15}, {"from": 26, "to": 23}, {"from": 26, "to": 27}, {"from": 26, "to": 26}, {"from": 26, "to": 14}, {"from": 27, "to": 26}, {"from": 27, "to": 23}, {"from": 27, "to": 14}, {"from": 28, "to": 3}]);
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            physics: {
+                enabled: true
+            },
+            edges: {
+                width: 1,
+                smooth: {
+                    type: 'continuous'
+                }
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200
+            },
+            nodes: {
+                shape: 'circle',
+                size: 25,
+                font: {
+                    size: 14,
+                    color: '#333'
+                },
+                borderWidth: 2,
+                borderWidthSelected: 3,
+                shadow: {
+                    enabled: true,
+                    color: 'rgba(0,0,0,0.15)',
+                    size: 8,
+                    x: 2,
+                    y: 2
+                }
+            }
+        };
+        var network = new vis.Network(container, data, options);
+        function showPopup(content) {
+            document.getElementById('popup-content').innerText = content;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+        function hidePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+        network.on('click', function(properties) {
+            if (properties.nodes.length > 0) {
+                var nodeId = properties.nodes[0];
+                var node = nodes.get(nodeId);
+                showPopup(node.title);
+            }
+        });
+        
+        network.on('hoverNode', function(params) {
+            var nodeId = params.node;
+            nodes.update({id: nodeId, font: {size: 20}, size: 30});
+        });
+        
+        network.on('blurNode', function(params) {
+            var nodeId = params.node;
+            nodes.update({id: nodeId, font: {size: 14}, size: 25});
+        });
+    </script>
+</body>
+</html>

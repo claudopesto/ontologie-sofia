@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>La philo c'est la vie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 0.9rem;
+            margin: 5px 0 0 0;
+            color: #666;
+            font-weight: normal;
+        }
+        #logo {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            height: 60px;
+            width: auto;
+            z-index: 200;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        #network {
+            width: 100%;
+            height: calc(100vh - 70px);
+        }
+        #legend {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        #legend h3 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.85rem;
+        }
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 20px;
+            display: none;
+            z-index: 1000;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+        #popup-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:active {
+            background: #0056b3;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+        @media (min-width: 768px) {
+            header {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+            }
+            #logo {
+                height: 80px;
+                top: 15px;
+                right: 15px;
+            }
+            #popup {
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="sofia_logo.png" alt="Sofia Logo">
+    <header>
+        <div>
+            <h1>La philo c'est la vie</h1>
+            <h2>Découvrez l'ontologie interactive de Sofia</h2>
+        </div>
+    </header>
+    <div id="network"></div>
+    <div id="legend">
+        <h3>Légende</h3>
+        <div class="legend-item"><div class="legend-color" style="background: #f878cd;"></div><span>Individu</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #7c81fd;"></div><span>Cognitif</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #080d94;"></div><span>Normes externes</span></div>
+        <div class="legend-item"><div class="legend-color" style="background: #eea5b2;"></div><span>Autre</span></div>
+    </div>
+    <div id="overlay" onclick="hidePopup()"></div>
+    <div id="popup">
+        <p id="popup-content"></p>
+        <button onclick="hidePopup()">Fermer</button>
+    </div>
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([{"id": 0, "label": "Aliénation", "title": "Être aliéné, c’est ne plus s’appartenir. C’est avoir le sentiment d’être dépossédé de soi-même. \nFait de ne plus s'appartenir soi-même, d'être la propriété réelle ou\nsymbolique de quelqu'un ou de quelque chose d’autre.\nExemple : je peux être aliéné par une dépendance", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 1, "label": "Identité", "title": "Ce qui permet de reconnaître quelqu’un ou quelque chose. Selon le principe d’identité, l’identité est le fait d’être égal à soi. Une chose est toujours égale à elle-même (A=A). Il s’agit d’un principe logique qui permet de s’assurer\nqu’une chose ne désigne pas une autre chose : lorsque j’utilise le terme « arbre », c’est pour désigner la chose arbre, et non une autre chose. Ce terme est toujours valable, en ce sens que demain, le mot n’aura pas changé et désignera toujours la même chose. L’identité désigne ainsi ce qui permet de reconnaître une chose dans son unité et dans le temps. Le concept englobe l’ensemble des caractéristiques immuables (qui ne changent pas) pouvant qualifier cette chose.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 2, "label": "Émancipation", "title": "Être émancipé, c’est sentir qu’on a réussi à se libérer d’une contrainte, d’une servitude \nExemple : je peux réussir à me libérer d'une emprise", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 3, "label": "Amour", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 4, "label": "Attention", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 5, "label": "Perception", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 6, "label": "Conscience", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 7, "label": "Liberté\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 8, "label": "Autorité", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 9, "label": "Pouvoir", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 10, "label": "Communauté", "title": "Une communauté est un groupement d’individus réunis autour d’une\nculture et d’une identité communes. La communauté se distingue de la société, qui tend à encourager l’émancipation de l’individu par rapport au groupe qui peut être aliénant. Dans la communauté, c’est le commun qui prime sur l’individu : celui-ci n’est qu’une partie formant le tout, ce qui signifie qu’il y a une hiérarchie entre les membres de la communauté et la communauté elle-même.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 11, "label": "Culture", "title": "La culture est l’ensemble des connaissances et des comportements propres à une communauté humaine, à un groupe humain constitué par ses affinités.", "color": "#080d94", "font": {"color": "white"}}, {"id": 12, "label": "Inconscient", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 13, "label": "Croyance", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 14, "label": "Religion", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 15, "label": "Attention\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 16, "label": "Devoir", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 17, "label": "Morale", "title": "La morale désigne la recherche d’un idéal de conduite, qui définit des règles\ncomportementales idéales qu’il faudrait suivre, mais qui ne sont pas toujours ajustées à la réalité.", "color": "#080d94", "font": {"color": "white"}}, {"id": 18, "label": "Éthique", "title": "L’éthique désigne une branche philosophique qui cherche à connaitre et à\ndéterminer les principes régulateurs de l’action humaine. En ce sens, elle fournit des règles concrètes à suivre pour l’action.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 19, "label": "Différence", "title": "Au contraire de l’identité, la différence est ce qui permet de distinguer les\nchoses. Elle est l’exact opposé de l’identité en ce qu’elle ne rassemble pas et ne vise pas\nl’unité.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 20, "label": "Société", "title": "La société place l’individu au centre des préoccupations. Elle forme un Tout qui est formé par la juxtaposition des individus, c’est-à-dire que les individus\nvivent les uns à côté des autres sans pour autant partager des choses communes. Les individus peuvent être distingués les uns des autres et demeurent séparés malgré leurs liens sociaux. Contrairement à la communauté, dans la société, les consciences ne sont plus agrégées les unes aux autres mais différenciées ce qui engendre l’émancipation de l’individu, qui s’accompagne du règne de l’individualisme. La société encourage alors\nl’autonomie de l’individu.", "color": "#080d94", "font": {"color": "white"}}, {"id": 21, "label": "État", "title": "Ensemble des institutions (politiques, économiques, sociales, culturelles...) qui\ngouvernent un pays sur un territoire donné. C’est un pouvoir souverain. C’est l’État qui dicte les règles pour l’ensemble des citoyens. Le pouvoir contraint les hommes à obéir aux lois qu’il édicte. ", "color": "#080d94", "font": {"color": "white"}}, {"id": 22, "label": "Liberté", "title": "État d’un individu qui n’est soumis qu’aux obligations qu’il se choisit et dont\nl’action n’est pas limitée par des contraintes externes. État de celui qui n’est pas aliéné, dont l’existence ne dépend pas d’un autre que lui.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 23, "label": "Mémoire", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 24, "label": "\"Attention", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 25, "label": "Culture\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 26, "label": "Mort", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 27, "label": "Temps", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 28, "label": "Mémoire\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 29, "label": "Philosophie", "title": "Selon l'étymologie grecque, la philosophie est un désir de sagesse, entendue comme la connaissance de ce qui est ", "color": "#080d94", "font": {"color": "white"}}, {"id": 30, "label": "Vérité", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 31, "label": "Technique", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 32, "label": "Travail", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 33, "label": "Bonheur", "title": "État de satisfaction complète et durable", "color": "#f878cd", "font": {"color": "#333"}}]);
+        var edges = new vis.DataSet([{"from": 0, "to": 1}, {"from": 0, "to": 2}, {"from": 3, "to": 1}, {"from": 4, "to": 5}, {"from": 4, "to": 6}, {"from": 4, "to": 7}, {"from": 8, "to": 9}, {"from": 10, "to": 11}, {"from": 10, "to": 1}, {"from": 10, "to": 2}, {"from": 6, "to": 12}, {"from": 13, "to": 14}, {"from": 13, "to": 15}, {"from": 11, "to": 10}, {"from": 11, "to": 1}, {"from": 16, "to": 17}, {"from": 16, "to": 18}, {"from": 16, "to": 0}, {"from": 16, "to": 2}, {"from": 19, "to": 1}, {"from": 19, "to": 20}, {"from": 2, "to": 0}, {"from": 21, "to": 9}, {"from": 21, "to": 8}, {"from": 21, "to": 22}, {"from": 18, "to": 17}, {"from": 1, "to": 19}, {"from": 1, "to": 10}, {"from": 12, "to": 6}, {"from": 22, "to": 2}, {"from": 22, "to": 0}, {"from": 23, "to": 24}, {"from": 23, "to": 12}, {"from": 23, "to": 6}, {"from": 23, "to": 22}, {"from": 23, "to": 25}, {"from": 17, "to": 18}, {"from": 26, "to": 22}, {"from": 26, "to": 27}, {"from": 5, "to": 24}, {"from": 5, "to": 13}, {"from": 5, "to": 28}, {"from": 29, "to": 30}, {"from": 29, "to": 20}, {"from": 9, "to": 21}, {"from": 9, "to": 8}, {"from": 14, "to": 30}, {"from": 20, "to": 10}, {"from": 20, "to": 0}, {"from": 20, "to": 11}, {"from": 20, "to": 2}, {"from": 20, "to": 1}, {"from": 20, "to": 21}, {"from": 31, "to": 27}, {"from": 31, "to": 32}, {"from": 31, "to": 2}, {"from": 31, "to": 0}, {"from": 31, "to": 22}, {"from": 27, "to": 32}, {"from": 27, "to": 27}, {"from": 32, "to": 27}, {"from": 32, "to": 1}, {"from": 32, "to": 6}, {"from": 30, "to": 29}, {"from": 30, "to": 14}, {"from": 33, "to": 22}, {"from": 33, "to": 18}]);
+        var container = document.getElementById('network');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            physics: {
+                enabled: true
+            },
+            edges: {
+                width: 1,
+                smooth: {
+                    type: 'continuous'
+                }
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200
+            },
+            nodes: {
+                shape: 'circle',
+                size: 25,
+                font: {
+                    size: 14,
+                    color: '#333'
+                },
+                borderWidth: 2,
+                borderWidthSelected: 3,
+                shadow: {
+                    enabled: true,
+                    color: 'rgba(0,0,0,0.15)',
+                    size: 8,
+                    x: 2,
+                    y: 2
+                }
+            }
+        };
+        var network = new vis.Network(container, data, options);
+        function showPopup(content) {
+            document.getElementById('popup-content').innerText = content;
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+        function hidePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+        network.on('click', function(properties) {
+            if (properties.nodes.length > 0) {
+                var nodeId = properties.nodes[0];
+                var node = nodes.get(nodeId);
+                showPopup(node.title);
+            }
+        });
+        
+        network.on('hoverNode', function(params) {
+            var nodeId = params.node;
+            nodes.update({id: nodeId, font: {size: 20}, size: 30});
+        });
+        
+        network.on('blurNode', function(params) {
+            var nodeId = params.node;
+            nodes.update({id: nodeId, font: {size: 14}, size: 25});
+        });
+    </script>
+</body>
+</html>
