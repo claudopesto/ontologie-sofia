@@ -42,9 +42,24 @@ client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 # Configuration MongoDB
 mongodb_uri = os.environ.get("MONGODB_URI")
 if mongodb_uri:
-    mongo_client = MongoClient(mongodb_uri)
-    db = mongo_client['ontologie_sofia']
-    concepts_collection = db['concepts']
+    try:
+        mongo_client = MongoClient(
+            mongodb_uri,
+            serverSelectionTimeoutMS=5000,
+            connectTimeoutMS=10000,
+            socketTimeoutMS=10000,
+            tls=True,
+            tlsAllowInvalidCertificates=False
+        )
+        db = mongo_client['ontologie_sofia']
+        concepts_collection = db['concepts']
+        # Tester la connexion
+        mongo_client.admin.command('ping')
+        print("✅ Connecté à MongoDB Atlas")
+    except Exception as e:
+        print(f"❌ Erreur connexion MongoDB: {e}")
+        mongo_client = None
+        concepts_collection = None
 else:
     mongo_client = None
     concepts_collection = None
