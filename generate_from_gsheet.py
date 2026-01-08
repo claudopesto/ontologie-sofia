@@ -25,17 +25,11 @@ concepts = list(reader)
 
 # Palette de couleurs par catégorie
 CATEGORY_COLORS = {
-    'Politique': '#FF6B6B',      # Rouge
-    'Existence': '#4ECDC4',      # Turquoise
-    'Cognitif': '#45B7D1',       # Bleu clair
-    'Identité': '#FFA07A',       # Orange
-    'Liberté': '#52B788',        # Vert
-    'Éthique': '#F7DC6F',        # Jaune
-    'Métaphysique': '#BB8FCE',   # Violet
-    'Épistémologie': '#85C1E2',  # Bleu
-    'Anthropologie': '#F8B739',  # Orange foncé
-    'Esthétique': '#E07A5F',     # Terracotta
-    'Autre': '#D4A5A5'           # Rose pâle
+    'Existence': '#7c81fd',
+    'Politique': '#080d94',
+    'Cognitif': '#eea5b2',
+    'Morale': '#f878cd',
+    'Sciences': '#e2a9f1'
 }
 
 # Première passe : créer un mapping label → id et construire les nœuds

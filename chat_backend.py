@@ -142,17 +142,11 @@ def get_concepts():
         
         # Palette de couleurs par catégorie
         CATEGORY_COLORS = {
-            'Politique': '#FF6B6B',
-            'Existence': '#4ECDC4',
-            'Cognitif': '#45B7D1',
-            'Identité': '#FFA07A',
-            'Liberté': '#52B788',
-            'Éthique': '#F7DC6F',
-            'Métaphysique': '#BB8FCE',
-            'Épistémologie': '#85C1E2',
-            'Anthropologie': '#F8B739',
-            'Esthétique': '#E07A5F',
-            'Autre': '#D4A5A5'
+            'Existence': '#7c81fd',
+            'Politique': '#080d94',
+            'Cognitif': '#eea5b2',
+            'Morale': '#f878cd',
+            'Sciences': '#e2a9f1'
         }
         
         # Première passe : créer un mapping label → id et construire les nœuds
