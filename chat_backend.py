@@ -7,8 +7,13 @@ Backend API pour le chat Sofia avec intégration d'une IA
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import sys
 from anthropic import Anthropic
 from dotenv import load_dotenv
+
+# Force UTF-8 encoding
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
 
 # Charger le fichier .env
 load_dotenv()
@@ -93,8 +98,10 @@ def chat():
         })
         
     except Exception as e:
+        error_msg = repr(e)  # Utiliser repr() au lieu de str() pour éviter les problèmes d'encodage
+        print(f"Erreur dans /chat: {error_msg}", file=sys.stderr)
         return jsonify({
-            'error': str(e),
+            'error': error_msg,
             'success': False
         }), 500
 
