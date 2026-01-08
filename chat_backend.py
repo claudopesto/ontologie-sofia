@@ -24,6 +24,7 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
+            "https://ontologie-sofia.vercel.app",
             "https://*.vercel.app",
             "http://localhost:8000",
             "http://127.0.0.1:8000"
