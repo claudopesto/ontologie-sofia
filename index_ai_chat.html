@@ -1119,12 +1119,24 @@
         
         network.on('hoverNode', function(params) {
             var nodeId = params.node;
-            nodes.update({id: nodeId, font: {size: 20}, size: 30});
+            var node = nodes.get(nodeId);
+            nodes.update({
+                id: nodeId, 
+                font: {size: 20}, 
+                size: 30,
+                color: node.color  // Préserver la couleur originale
+            });
         });
         
         network.on('blurNode', function(params) {
             var nodeId = params.node;
-            nodes.update({id: nodeId, font: {size: 14}, size: 25});
+            var node = nodes.get(nodeId);
+            nodes.update({
+                id: nodeId, 
+                font: {size: 14}, 
+                size: 25,
+                color: node.color  // Préserver la couleur originale
+            });
         });
         
         // Chat functions
