@@ -126,7 +126,7 @@ def get_concepts():
     Retourne les nœuds et les relations pour le graphe vis.js
     """
     try:
-        if not concepts_collection:
+        if concepts_collection is None:
             return jsonify({
                 'error': 'MongoDB non configuré',
                 'success': False
