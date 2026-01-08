@@ -140,18 +140,28 @@ def get_concepts():
                 'success': False
             }), 503
         
-        # Construire les nœuds et les arêtes pour vis.js
+        # Palette de couleurs pour les concepts
+        COLORS = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
+            '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B739', '#52B788',
+            '#E07A5F', '#81B29A', '#F2CC8F', '#D4A5A5', '#9D84B7'
+        ]
+        
+        # Première passe : créer un mapping label → id et construire les nœuds
+        label_to_id = {}
         nodes = []
-        edges = []
         
         for i, concept in enumerate(concepts):
             concept_id = concept.get('id', '').strip() or str(i + 1)
             label = concept.get('label', '').strip()
             definition = concept.get('definition', '').strip()
-            color = concept.get('color', '').strip() or '#97C2FC'
+            color = concept.get('color', '').strip() or COLORS[i % len(COLORS)]
             
             if not label:  # Skip empty rows
                 continue
+            
+            # Enregistrer le mapping
+            label_to_id[label] = concept_id
             
             # Créer le nœud
             node = {
@@ -161,16 +171,25 @@ def get_concepts():
                 'color': color
             }
             nodes.append(node)
+        
+        # Deuxième passe : créer les arêtes avec les IDs corrects
+        edges = []
+        for i, concept in enumerate(concepts):
+            concept_id = concept.get('id', '').strip() or str(i + 1)
+            label = concept.get('label', '').strip()
             
-            # Créer les arêtes (relations) - dernière colonne
+            if not label:
+                continue
+            
+            # Créer les arêtes (relations) - dernière colonne sans nom
             relations_str = concept.get('', '').strip()
             if relations_str:
                 related_concepts = [r.strip() for r in relations_str.split(',')]
-                for related in related_concepts:
-                    if related:
+                for related_label in related_concepts:
+                    if related_label and related_label in label_to_id:
                         edge = {
                             'from': concept_id,
-                            'to': related
+                            'to': label_to_id[related_label]
                         }
                         edges.append(edge)
         
