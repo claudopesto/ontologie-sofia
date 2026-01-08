@@ -23,12 +23,20 @@ csv_content = response.text
 reader = csv.DictReader(StringIO(csv_content))
 concepts = list(reader)
 
-# Palette de couleurs pour les concepts
-COLORS = [
-    '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
-    '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B739', '#52B788',
-    '#E07A5F', '#81B29A', '#F2CC8F', '#D4A5A5', '#9D84B7'
-]
+# Palette de couleurs par catégorie
+CATEGORY_COLORS = {
+    'Politique': '#FF6B6B',      # Rouge
+    'Existence': '#4ECDC4',      # Turquoise
+    'Cognitif': '#45B7D1',       # Bleu clair
+    'Identité': '#FFA07A',       # Orange
+    'Liberté': '#52B788',        # Vert
+    'Éthique': '#F7DC6F',        # Jaune
+    'Métaphysique': '#BB8FCE',   # Violet
+    'Épistémologie': '#85C1E2',  # Bleu
+    'Anthropologie': '#F8B739',  # Orange foncé
+    'Esthétique': '#E07A5F',     # Terracotta
+    'Autre': '#D4A5A5'           # Rose pâle
+}
 
 # Première passe : créer un mapping label → id et construire les nœuds
 label_to_id = {}
@@ -38,7 +46,10 @@ for i, concept in enumerate(concepts):
     concept_id = concept.get('id', '').strip() or str(i + 1)
     label = concept.get('label', '').strip()
     definition = concept.get('definition', '').strip()
-    color = concept.get('color', '').strip() or COLORS[i % len(COLORS)]
+    categorie = concept.get('categorie', '').strip() or 'Autre'
+    
+    # Couleur selon la catégorie
+    color = CATEGORY_COLORS.get(categorie, '#97C2FC')
     
     if not label:  # Skip empty rows
         continue
@@ -50,8 +61,9 @@ for i, concept in enumerate(concepts):
     node = {
         "id": concept_id,
         "label": label,
-        "title": definition,
-        "color": color
+        "title": f"{definition}\n\nCatégorie: {categorie}",
+        "color": color,
+        "group": categorie
     }
     nodes.append(node)
 
@@ -64,8 +76,12 @@ for i, concept in enumerate(concepts):
     if not label:
         continue
     
-    # Créer les arêtes (relations) - dernière colonne sans nom
-    relations_str = concept.get('', '').strip()
+    # Créer les arêtes (relations) - colonne relations_to
+    relations_str = concept.get('relations_to', '').strip()
+    if not relations_str:
+        # Fallback: essayer la dernière colonne sans nom
+        relations_str = concept.get('', '').strip()
+    
     if relations_str:
         # Relations séparées par virgules
         related_concepts = [r.strip() for r in relations_str.split(',')]
