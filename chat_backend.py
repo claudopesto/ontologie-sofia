@@ -160,6 +160,9 @@ def get_concepts():
             categorie = concept.get('categorie ', '').strip() or 'Autre'
             color = CATEGORY_COLORS.get(categorie, '#97C2FC')
             
+            # Couleur de police (blanc pour Politique et Sciences)
+            font_color = 'white' if categorie in ['Politique', 'Sciences'] else '#333'
+            
             if not label:  # Skip empty rows
                 continue
             
@@ -172,7 +175,8 @@ def get_concepts():
                 'label': label,
                 'title': f"{definition}\n\nCatégorie: {categorie}",
                 'color': color,
-                'group': categorie
+                'group': categorie,
+                'font': {'color': font_color}
             }
             nodes.append(node)
         

@@ -5,196 +5,280 @@
       "label": "Aliénation",
       "title": "Être aliéné, c’est ne plus s’appartenir. C'est avoir le sentiment d’être dépossédé de soi-même, d'être la propriété réelle ou symbolique de quelqu'un ou de quelque chose d’autre. Je peux par exemple être aliéné par une dépendance à une substance, une absence, à quelqu'un, etc.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "2",
       "label": "Amour",
       "title": "\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "3",
       "label": "Attention",
       "title": "\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "4",
       "label": "Autorité",
       "title": "\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "5",
       "label": "Communauté",
       "title": "Une communauté est un groupement d’individus réunis autour d’une culture et d’une identité communes. La communauté se distingue de la société, qui tend à encourager l’émancipation de l’individu par rapport au groupe qui peut être aliénant. Dans la communauté, c’est le commun qui prime sur l’individu : celui-ci n’est qu’une partie formant le tout, ce qui signifie qu’il y a une hiérarchie entre les membres de la communauté et la communauté elle-même.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "6",
       "label": "Conscience",
       "title": "\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "7",
       "label": "Croyance",
       "title": "\n\nCatégorie: Morale",
       "color": "#f878cd",
-      "group": "Morale"
+      "group": "Morale",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "8",
       "label": "Culture",
       "title": "La culture est l’ensemble des connaissances et des comportements propres à une communauté humaine, à un groupe humain constitué par ses affinités.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "9",
       "label": "Devoir",
       "title": "\n\nCatégorie: Morale",
       "color": "#f878cd",
-      "group": "Morale"
+      "group": "Morale",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "10",
       "label": "Différence",
       "title": "Au contraire de l’identité, la différence est ce qui permet de distinguer les choses. Elle est l’exact opposé de l’identité en ce qu’elle ne rassemble pas et ne vise pas l’unité.\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "11",
       "label": "Émancipation",
       "title": "Être émancipé, c’est sentir qu’on a réussi à se libérer d’une contrainte, d’une servitude. Je peux par exemple réussir à me libérer de l'emprise que quelqu'un avait sur moi.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "12",
       "label": "État",
       "title": "Ensemble des institutions (politiques, économiques, sociales, culturelles...) qui gouvernent un pays sur un territoire donné. C’est un pouvoir souverain. C’est l’État qui dicte les règles pour l’ensemble des citoyens. Le pouvoir contraint les hommes à obéir aux lois qu’il édicte.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "13",
       "label": "Éthique",
       "title": "L’éthique désigne une branche philosophique qui cherche à connaitre et à déterminer les principes régulateurs de l’action humaine. En ce sens, elle fournit des règles concrètes à suivre pour l’action.\n\nCatégorie: Morale",
       "color": "#f878cd",
-      "group": "Morale"
+      "group": "Morale",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "14",
       "label": "Identité",
       "title": "qu’une chose ne désigne pas une autre chose : lorsque j’utilise le terme « arbre », c’est pour désigner la chose arbre, et non une autre chose. Ce terme est toujours valable, en ce sens que demain, le mot n’aura pas changé et désignera toujours la même chose. L’identité désigne ainsi ce qui permet de reconnaître une chose dans son unité et dans le temps. Le concept englobe l’ensemble des caractéristiques immuables (qui ne changent pas) pouvant qualifier cette chose.\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "15",
       "label": "Inconscient",
       "title": "\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "16",
       "label": "Liberté",
       "title": "État d’un individu qui n’est soumis qu’aux obligations qu’il se choisit et dont l’action n’est pas limitée par des contraintes externes. État de celui qui n’est pas aliéné, dont l’existence ne dépend pas d’un autre que lui.\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "17",
       "label": "Mémoire",
       "title": "\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "18",
       "label": "Morale",
       "title": "La morale désigne la recherche d’un idéal de conduite, qui définit des règles comportementales idéales qu’il faudrait suivre, mais qui ne sont pas toujours ajustées à la réalité.\n\nCatégorie: Morale",
       "color": "#f878cd",
-      "group": "Morale"
+      "group": "Morale",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "19",
       "label": "Mort",
       "title": "\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "20",
       "label": "Perception",
       "title": "\n\nCatégorie: Cognitif",
       "color": "#eea5b2",
-      "group": "Cognitif"
+      "group": "Cognitif",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "21",
       "label": "Philosophie",
       "title": "Selon l'étymologie grecque, la philosophie est l'amour, ou plutôt le désir de la sagesse, entendue comme la prudence, la modération et la connaissance de ce qui est.\n\nCatégorie: Sciences",
       "color": "#e2a9f1",
-      "group": "Sciences"
+      "group": "Sciences",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "22",
       "label": "Pouvoir",
       "title": "\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "23",
       "label": "Religion",
       "title": "\n\nCatégorie: Morale",
       "color": "#f878cd",
-      "group": "Morale"
+      "group": "Morale",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "24",
       "label": "Société",
       "title": "La société est un groupement d'individus qui tend à placer l’individu au centre des préoccupations. Elle forme un Tout qui est formé par la juxtaposition des individus, c’est-à-dire que les individus vivent les uns à côté des autres sans pour autant partager des choses communes. Les individus peuvent être distingués les uns des autres et demeurent séparés malgré leurs liens sociaux. Contrairement à la communauté, dans la société, les consciences ne sont plus agrégées les unes aux autres mais différenciées ce qui engendre l’émancipation de l’individu, qui s’accompagne du règne de l’individualisme. La société encourage alors l’autonomie de l’individu.\n\nCatégorie: Politique",
       "color": "#080d94",
-      "group": "Politique"
+      "group": "Politique",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "25",
       "label": "Technique",
       "title": "\n\nCatégorie: Sciences",
       "color": "#e2a9f1",
-      "group": "Sciences"
+      "group": "Sciences",
+      "font": {
+        "color": "white"
+      }
     },
     {
       "id": "26",
       "label": "Temps",
       "title": "\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "27",
       "label": "Travail",
       "title": "\n\nCatégorie: Existence",
       "color": "#7c81fd",
-      "group": "Existence"
+      "group": "Existence",
+      "font": {
+        "color": "#333"
+      }
     },
     {
       "id": "28",
       "label": "Vérité",
       "title": "\n\nCatégorie: Sciences",
       "color": "#e2a9f1",
-      "group": "Sciences"
+      "group": "Sciences",
+      "font": {
+        "color": "white"
+      }
     }
   ],
   "edges": [

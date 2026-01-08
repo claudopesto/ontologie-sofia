@@ -45,6 +45,9 @@ for i, concept in enumerate(concepts):
     # Couleur selon la catégorie
     color = CATEGORY_COLORS.get(categorie, '#97C2FC')
     
+    # Couleur de police (blanc pour Politique et Sciences)
+    font_color = 'white' if categorie in ['Politique', 'Sciences'] else '#333'
+    
     if not label:  # Skip empty rows
         continue
     
@@ -57,7 +60,8 @@ for i, concept in enumerate(concepts):
         "label": label,
         "title": f"{definition}\n\nCatégorie: {categorie}",
         "color": color,
-        "group": categorie
+        "group": categorie,
+        "font": {"color": font_color}
     }
     nodes.append(node)
 
