@@ -12,6 +12,7 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from bson import ObjectId
+import urllib.parse
 
 # Force UTF-8 encoding
 sys.stdout.reconfigure(encoding='utf-8')
@@ -43,13 +44,16 @@ client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 mongodb_uri = os.environ.get("MONGODB_URI")
 if mongodb_uri:
     try:
+        # Ajouter tlsAllowInvalidCertificates=true à l'URI si pas déjà présent
+        if 'tlsAllowInvalidCertificates' not in mongodb_uri:
+            separator = '&' if '?' in mongodb_uri else '?'
+            mongodb_uri = f"{mongodb_uri}{separator}tlsAllowInvalidCertificates=true"
+        
         mongo_client = MongoClient(
             mongodb_uri,
-            serverSelectionTimeoutMS=5000,
-            connectTimeoutMS=10000,
-            socketTimeoutMS=10000,
-            tls=True,
-            tlsAllowInvalidCertificates=False
+            serverSelectionTimeoutMS=30000,
+            connectTimeoutMS=30000,
+            socketTimeoutMS=30000
         )
         db = mongo_client['ontologie_sofia']
         concepts_collection = db['concepts']
