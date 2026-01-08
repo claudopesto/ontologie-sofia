@@ -1065,10 +1065,23 @@
         };
         var options = {
             physics: {
-                enabled: true
+                enabled: true,
+                stabilization: {
+                    iterations: 200
+                },
+                barnesHut: {
+                    gravitationalConstant: -2000,
+                    springLength: 150,
+                    springConstant: 0.04
+                }
             },
             edges: {
                 width: 1,
+                color: {
+                    color: '#848484',
+                    highlight: '#000000',
+                    hover: '#000000'
+                },
                 smooth: {
                     type: 'continuous'
                 }
