@@ -390,7 +390,7 @@
             <div class="message bot">
                 <span class="message-label">Sofia</span>
                 <div class="message-content">
-                    Bonjour ! Je suis Sofia, votre assistante philosophique IA. Posez-moi des questions sur les concepts philosophiques et je vous aiderai à mieux les comprendre ! 🧠✨
+                    Hello ! Content de te voir ! Quelle idée te parle le plus aujourd'hui ?
                 </div>
             </div>
         </div>
@@ -409,7 +409,7 @@
     
     <script type="text/javascript">
         // Configuration
-        const API_URL = 'https://ontologie-production.up.railway.app/chat';
+        const API_URL = 'http://127.0.0.1:5001/chat';
         let conversationHistory = [];
         
         // Network data
@@ -1248,6 +1248,15 @@
                 document.getElementById('chat-input').focus();
             }
         }
+        
+        // Auto-open chat after 5 seconds
+        setTimeout(function() {
+            var chatContainer = document.getElementById('chat-container');
+            if (!chatContainer.classList.contains('active')) {
+                chatContainer.classList.add('active');
+                document.getElementById('chat-input').focus();
+            }
+        }, 5000);
         
         function handleKeyPress(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
