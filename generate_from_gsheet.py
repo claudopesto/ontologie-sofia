@@ -90,6 +90,17 @@ for i, concept in enumerate(concepts):
 print(f"📊 {len(nodes)} concepts trouvés")
 print(f"🔗 {len(edges)} relations trouvées")
 
+# Sauvegarder les données dans graph_data.json
+graph_data = {
+    "nodes": nodes,
+    "edges": edges
+}
+
+with open('graph_data.json', 'w', encoding='utf-8') as f:
+    json.dump(graph_data, f, ensure_ascii=False, indent=2)
+
+print(f"✅ Fichier sauvegardé : graph_data.json")
+
 # Lire le template HTML
 with open('index_ai_chat.html', 'r', encoding='utf-8') as f:
     html_content = f.read()
