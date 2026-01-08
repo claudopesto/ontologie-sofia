@@ -1067,12 +1067,15 @@
             physics: {
                 enabled: true,
                 stabilization: {
-                    iterations: 200
+                    iterations: 100
                 },
                 barnesHut: {
-                    gravitationalConstant: -2000,
-                    springLength: 150,
-                    springConstant: 0.04
+                    gravitationalConstant: -8000,
+                    centralGravity: 0.3,
+                    springLength: 200,
+                    springConstant: 0.05,
+                    damping: 0.09,
+                    avoidOverlap: 0.1
                 }
             },
             edges: {
