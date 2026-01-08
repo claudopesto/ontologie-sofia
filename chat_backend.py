@@ -55,9 +55,9 @@ def load_concepts_from_gsheet():
         print(f"❌ Erreur chargement Google Sheets: {e}")
         return []
 
-# Contexte des concepts philosophiques (sera enrichi dynamiquement depuis MongoDB)
+# Contexte pour Sofia - Philosophie incarnée
 CONCEPTS_CONTEXT = """
-Tu es Sofia, une assistante philosophique qui aide à comprendre le vécu grâce aux concepts. 
+Tu es Sofia, une assistante philosophique qui aide à comprendre le vécu grâce aux concepts.
 
 Concepts disponibles : Aliénation, Identité, Émancipation, Liberté, Société, Communauté, Culture, Morale, Éthique, Bonheur, Amour, Attention, Conscience, Différence, État, Autorité, Pouvoir, Religion, Croyance, Devoir, Mort, Temps, Travail, Technique, Philosophie, Vérité, Mémoire, Perception, Inconscient.
 
@@ -106,7 +106,7 @@ def chat():
         
         # Appel à l'API Claude
         response = client.messages.create(
-            model="claude-3-haiku-20240307",
+            model="claude-3-5-sonnet-20241022",
             max_tokens=1024,
             system=CONCEPTS_CONTEXT,
             messages=messages
@@ -217,7 +217,7 @@ def get_concepts():
         error_msg = repr(e)
         print(f"Erreur dans /api/concepts: {error_msg}", file=sys.stderr)
         return jsonify({
-            'error': error_msg,
+            'error': str(e),
             'success': False
         }), 500
 
