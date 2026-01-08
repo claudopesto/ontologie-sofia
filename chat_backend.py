@@ -10,9 +10,9 @@ import os
 import sys
 from anthropic import Anthropic
 from dotenv import load_dotenv
-from pymongo import MongoClient
-from bson import ObjectId
-import urllib.parse
+import requests
+import csv
+from io import StringIO
 
 # Force UTF-8 encoding
 sys.stdout.reconfigure(encoding='utf-8')
@@ -40,34 +40,20 @@ CORS(app, resources={
 # Configuration de l'API Anthropic (Claude)
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
-# Configuration MongoDB
-mongodb_uri = os.environ.get("MONGODB_URI")
-if mongodb_uri:
+# Configuration Google Sheets
+SHEET_ID = "1iIjx0cpG_inITgsoxR8hSSRDMt2uZMYlyD4KEhZSpiY"
+CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
+
+def load_concepts_from_gsheet():
+    """Charge les concepts depuis Google Sheets"""
     try:
-        # Ajouter tlsAllowInvalidCertificates=true à l'URI si pas déjà présent
-        if 'tlsAllowInvalidCertificates' not in mongodb_uri:
-            separator = '&' if '?' in mongodb_uri else '?'
-            mongodb_uri = f"{mongodb_uri}{separator}tlsAllowInvalidCertificates=true"
-        
-        mongo_client = MongoClient(
-            mongodb_uri,
-            serverSelectionTimeoutMS=30000,
-            connectTimeoutMS=30000,
-            socketTimeoutMS=30000
-        )
-        db = mongo_client['ontologie_sofia']
-        concepts_collection = db['concepts']
-        # Tester la connexion
-        mongo_client.admin.command('ping')
-        print("✅ Connecté à MongoDB Atlas")
+        response = requests.get(CSV_URL, allow_redirects=True, timeout=10)
+        response.encoding = 'utf-8'
+        reader = csv.DictReader(StringIO(response.text))
+        return list(reader)
     except Exception as e:
-        print(f"❌ Erreur connexion MongoDB: {e}")
-        mongo_client = None
-        concepts_collection = None
-else:
-    mongo_client = None
-    concepts_collection = None
-    print("⚠️  MONGODB_URI n'est pas configurée - endpoint /api/concepts désactivé")
+        print(f"❌ Erreur chargement Google Sheets: {e}")
+        return []
 
 # Contexte des concepts philosophiques (sera enrichi dynamiquement depuis MongoDB)
 CONCEPTS_CONTEXT = """
@@ -141,44 +127,52 @@ def chat():
 @app.route('/api/concepts', methods=['GET'])
 def get_concepts():
     """
-    Endpoint pour récupérer tous les concepts depuis MongoDB
+    Endpoint pour récupérer tous les concepts depuis Google Sheets
     Retourne les nœuds et les relations pour le graphe vis.js
     """
     try:
-        if concepts_collection is None:
+        # Charger les concepts depuis Google Sheets
+        concepts = load_concepts_from_gsheet()
+        
+        if not concepts:
             return jsonify({
-                'error': 'MongoDB non configuré',
+                'error': 'Impossible de charger les concepts',
                 'success': False
             }), 503
-        
-        # Récupérer tous les concepts
-        concepts = list(concepts_collection.find())
         
         # Construire les nœuds et les arêtes pour vis.js
         nodes = []
         edges = []
         
-        for concept in concepts:
+        for i, concept in enumerate(concepts):
+            concept_id = concept.get('id', '').strip() or str(i + 1)
+            label = concept.get('label', '').strip()
+            definition = concept.get('definition', '').strip()
+            color = concept.get('color', '').strip() or '#97C2FC'
+            
+            if not label:  # Skip empty rows
+                continue
+            
             # Créer le nœud
             node = {
-                'id': str(concept['_id']),
-                'label': concept.get('label', 'Sans nom'),
-                'title': concept.get('definition', 'Aucune info'),
-                'color': concept.get('color', '#eea5b2'),
-                'font': {
-                    'color': concept.get('fontColor', '#333')
-                }
+                'id': concept_id,
+                'label': label,
+                'title': definition,
+                'color': color
             }
             nodes.append(node)
             
-            # Créer les arêtes (relations)
-            if 'relations' in concept and concept['relations']:
-                for relation in concept['relations']:
-                    edge = {
-                        'from': str(concept['_id']),
-                        'to': str(relation)
-                    }
-                    edges.append(edge)
+            # Créer les arêtes (relations) - dernière colonne
+            relations_str = concept.get('', '').strip()
+            if relations_str:
+                related_concepts = [r.strip() for r in relations_str.split(',')]
+                for related in related_concepts:
+                    if related:
+                        edge = {
+                            'from': concept_id,
+                            'to': related
+                        }
+                        edges.append(edge)
         
         return jsonify({
             'nodes': nodes,

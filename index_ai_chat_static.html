@@ -412,623 +412,184 @@
         const CONCEPTS_API_URL = 'https://ontologie-production.up.railway.app/api/concepts';
         let conversationHistory = [];
         
-        // Network data - chargé depuis Google Sheets
+        // Network data - chargé depuis MongoDB
         var nodes = new vis.DataSet([
             {
-                        "id": "1",
+                        "id": null,
                         "label": "Aliénation",
-                        "title": "Être aliéné, c’est ne plus s’appartenir. C'est avoir le sentiment d’être dépossédé de soi-même, d'être la propriété réelle ou symbolique de quelqu'un ou de quelque chose d’autre. Je peux par exemple être aliéné par une dépendance à une substance, une absence, à quelqu'un, etc.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "2",
+                        "id": null,
                         "label": "Amour",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "3",
+                        "id": null,
                         "label": "Attention",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "4",
+                        "id": null,
                         "label": "Autorité",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "5",
+                        "id": null,
                         "label": "Communauté",
-                        "title": "Une communauté est un groupement d’individus réunis autour d’une culture et d’une identité communes. La communauté se distingue de la société, qui tend à encourager l’émancipation de l’individu par rapport au groupe qui peut être aliénant. Dans la communauté, c’est le commun qui prime sur l’individu : celui-ci n’est qu’une partie formant le tout, ce qui signifie qu’il y a une hiérarchie entre les membres de la communauté et la communauté elle-même.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "6",
+                        "id": null,
                         "label": "Conscience",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "7",
+                        "id": null,
                         "label": "Croyance",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "8",
+                        "id": null,
                         "label": "Culture",
-                        "title": "La culture est l’ensemble des connaissances et des comportements propres à une communauté humaine, à un groupe humain constitué par ses affinités.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "9",
+                        "id": null,
                         "label": "Devoir",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "10",
+                        "id": null,
                         "label": "Différence",
-                        "title": "Au contraire de l’identité, la différence est ce qui permet de distinguer les choses. Elle est l’exact opposé de l’identité en ce qu’elle ne rassemble pas et ne vise pas l’unité.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "11",
+                        "id": null,
                         "label": "Émancipation",
-                        "title": "Être émancipé, c’est sentir qu’on a réussi à se libérer d’une contrainte, d’une servitude. Je peux par exemple réussir à me libérer de l'emprise que quelqu'un avait sur moi.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "12",
+                        "id": null,
                         "label": "État",
-                        "title": "Ensemble des institutions (politiques, économiques, sociales, culturelles...) qui gouvernent un pays sur un territoire donné. C’est un pouvoir souverain. C’est l’État qui dicte les règles pour l’ensemble des citoyens. Le pouvoir contraint les hommes à obéir aux lois qu’il édicte.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "13",
+                        "id": null,
                         "label": "Éthique",
-                        "title": "L’éthique désigne une branche philosophique qui cherche à connaitre et à déterminer les principes régulateurs de l’action humaine. En ce sens, elle fournit des règles concrètes à suivre pour l’action.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "14",
+                        "id": null,
                         "label": "Identité",
-                        "title": "qu’une chose ne désigne pas une autre chose : lorsque j’utilise le terme « arbre », c’est pour désigner la chose arbre, et non une autre chose. Ce terme est toujours valable, en ce sens que demain, le mot n’aura pas changé et désignera toujours la même chose. L’identité désigne ainsi ce qui permet de reconnaître une chose dans son unité et dans le temps. Le concept englobe l’ensemble des caractéristiques immuables (qui ne changent pas) pouvant qualifier cette chose.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "15",
+                        "id": null,
                         "label": "Inconscient",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "16",
+                        "id": null,
                         "label": "Liberté",
-                        "title": "État d’un individu qui n’est soumis qu’aux obligations qu’il se choisit et dont l’action n’est pas limitée par des contraintes externes. État de celui qui n’est pas aliéné, dont l’existence ne dépend pas d’un autre que lui.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "17",
+                        "id": null,
                         "label": "Mémoire",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "18",
+                        "id": null,
                         "label": "Morale",
-                        "title": "La morale désigne la recherche d’un idéal de conduite, qui définit des règles comportementales idéales qu’il faudrait suivre, mais qui ne sont pas toujours ajustées à la réalité.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "19",
+                        "id": null,
                         "label": "Mort",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "20",
+                        "id": null,
                         "label": "Perception",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "21",
+                        "id": null,
                         "label": "Philosophie",
-                        "title": "Selon l'étymologie grecque, la philosophie est l'amour, ou plutôt le désir de la sagesse, entendue comme la prudence, la modération et la connaissance de ce qui est.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "22",
+                        "id": null,
                         "label": "Pouvoir",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "23",
+                        "id": null,
                         "label": "Religion",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "24",
+                        "id": null,
                         "label": "Société",
-                        "title": "La société est un groupement d'individus qui tend à placer l’individu au centre des préoccupations. Elle forme un Tout qui est formé par la juxtaposition des individus, c’est-à-dire que les individus vivent les uns à côté des autres sans pour autant partager des choses communes. Les individus peuvent être distingués les uns des autres et demeurent séparés malgré leurs liens sociaux. Contrairement à la communauté, dans la société, les consciences ne sont plus agrégées les unes aux autres mais différenciées ce qui engendre l’émancipation de l’individu, qui s’accompagne du règne de l’individualisme. La société encourage alors l’autonomie de l’individu.",
+                        "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "25",
+                        "id": null,
                         "label": "Technique",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "26",
+                        "id": null,
                         "label": "Temps",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "27",
+                        "id": null,
                         "label": "Travail",
                         "title": "",
                         "color": "#97C2FC"
             },
             {
-                        "id": "28",
+                        "id": null,
                         "label": "Vérité",
+                        "title": "",
+                        "color": "#97C2FC"
+            },
+            {
+                        "id": null,
+                        "label": "Bonheur",
                         "title": "",
                         "color": "#97C2FC"
             }
 ]);
-        var edges = new vis.DataSet([
-            {
-                        "from": "1",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "1",
-                        "to": "État"
-            },
-            {
-                        "from": "1",
-                        "to": "Morale"
-            },
-            {
-                        "from": "2",
-                        "to": "Attention"
-            },
-            {
-                        "from": "2",
-                        "to": "Différence"
-            },
-            {
-                        "from": "2",
-                        "to": "Identité"
-            },
-            {
-                        "from": "2",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "3",
-                        "to": "Amour"
-            },
-            {
-                        "from": "3",
-                        "to": "Perception"
-            },
-            {
-                        "from": "3",
-                        "to": "Mémoire"
-            },
-            {
-                        "from": "3",
-                        "to": "Conscience"
-            },
-            {
-                        "from": "3",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "4",
-                        "to": "État"
-            },
-            {
-                        "from": "4",
-                        "to": "Pouvoir"
-            },
-            {
-                        "from": "4",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "4",
-                        "to": "Société"
-            },
-            {
-                        "from": "5",
-                        "to": "Société"
-            },
-            {
-                        "from": "5",
-                        "to": "Identité"
-            },
-            {
-                        "from": "5",
-                        "to": "Différence"
-            },
-            {
-                        "from": "5",
-                        "to": "Culture"
-            },
-            {
-                        "from": "6",
-                        "to": "Inconscient"
-            },
-            {
-                        "from": "6",
-                        "to": "Morale"
-            },
-            {
-                        "from": "7",
-                        "to": "Religion"
-            },
-            {
-                        "from": "7",
-                        "to": "Attention"
-            },
-            {
-                        "from": "7",
-                        "to": "Perception"
-            },
-            {
-                        "from": "8",
-                        "to": "Communauté"
-            },
-            {
-                        "from": "8",
-                        "to": "Société"
-            },
-            {
-                        "from": "8",
-                        "to": "Identité"
-            },
-            {
-                        "from": "8",
-                        "to": "Différence"
-            },
-            {
-                        "from": "9",
-                        "to": "État"
-            },
-            {
-                        "from": "9",
-                        "to": "Morale"
-            },
-            {
-                        "from": "9",
-                        "to": "Éthique"
-            },
-            {
-                        "from": "9",
-                        "to": "Religion"
-            },
-            {
-                        "from": "9",
-                        "to": "Mort"
-            },
-            {
-                        "from": "9",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "9",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "9",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "10",
-                        "to": "Identité"
-            },
-            {
-                        "from": "11",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "11",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "12",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "12",
-                        "to": "Pouvoir"
-            },
-            {
-                        "from": "12",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "13",
-                        "to": "Morale"
-            },
-            {
-                        "from": "13",
-                        "to": "Mort"
-            },
-            {
-                        "from": "13",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "14",
-                        "to": "Travail"
-            },
-            {
-                        "from": "14",
-                        "to": "Différence"
-            },
-            {
-                        "from": "14",
-                        "to": "Culture"
-            },
-            {
-                        "from": "14",
-                        "to": "Communauté"
-            },
-            {
-                        "from": "14",
-                        "to": "Société"
-            },
-            {
-                        "from": "14",
-                        "to": "Éthique"
-            },
-            {
-                        "from": "14",
-                        "to": "Mort"
-            },
-            {
-                        "from": "15",
-                        "to": "Conscience"
-            },
-            {
-                        "from": "15",
-                        "to": "Mémoire"
-            },
-            {
-                        "from": "16",
-                        "to": "Travail"
-            },
-            {
-                        "from": "16",
-                        "to": "Société"
-            },
-            {
-                        "from": "16",
-                        "to": "Attention"
-            },
-            {
-                        "from": "16",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "16",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "17",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "17",
-                        "to": "Attention"
-            },
-            {
-                        "from": "17",
-                        "to": "Inconscient"
-            },
-            {
-                        "from": "17",
-                        "to": "Conscience"
-            },
-            {
-                        "from": "18",
-                        "to": "Éthique"
-            },
-            {
-                        "from": "18",
-                        "to": "Religion"
-            },
-            {
-                        "from": "18",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "18",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "18",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "19",
-                        "to": "Éthique"
-            },
-            {
-                        "from": "19",
-                        "to": "Morale"
-            },
-            {
-                        "from": "19",
-                        "to": "Différence"
-            },
-            {
-                        "from": "19",
-                        "to": "Identité"
-            },
-            {
-                        "from": "19",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "20",
-                        "to": "Attention"
-            },
-            {
-                        "from": "20",
-                        "to": "Croyance"
-            },
-            {
-                        "from": "20",
-                        "to": "Conscience"
-            },
-            {
-                        "from": "20",
-                        "to": "Inconscient"
-            },
-            {
-                        "from": "21",
-                        "to": "Attention"
-            },
-            {
-                        "from": "21",
-                        "to": "État"
-            },
-            {
-                        "from": "21",
-                        "to": "Vérité"
-            },
-            {
-                        "from": "21",
-                        "to": "Société"
-            },
-            {
-                        "from": "21",
-                        "to": "Différence"
-            },
-            {
-                        "from": "21",
-                        "to": "Amour"
-            },
-            {
-                        "from": "22",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "22",
-                        "to": "État"
-            },
-            {
-                        "from": "23",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "23",
-                        "to": "Morale"
-            },
-            {
-                        "from": "23",
-                        "to": "Mort"
-            },
-            {
-                        "from": "23",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "23",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "23",
-                        "to": "Communauté"
-            },
-            {
-                        "from": "23",
-                        "to": "Société"
-            },
-            {
-                        "from": "24",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "24",
-                        "to": "État"
-            },
-            {
-                        "from": "24",
-                        "to": "Communauté"
-            },
-            {
-                        "from": "25",
-                        "to": "Travail"
-            },
-            {
-                        "from": "25",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "25",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "26",
-                        "to": "Travail"
-            },
-            {
-                        "from": "26",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "26",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "26",
-                        "to": "Société"
-            },
-            {
-                        "from": "27",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "27",
-                        "to": "Aliénation"
-            },
-            {
-                        "from": "27",
-                        "to": "Émancipation"
-            },
-            {
-                        "from": "27",
-                        "to": "Technique"
-            },
-            {
-                        "from": "27",
-                        "to": "Temps"
-            },
-            {
-                        "from": "28",
-                        "to": "Autorité"
-            },
-            {
-                        "from": "28",
-                        "to": "Liberté"
-            },
-            {
-                        "from": "28",
-                        "to": "Philosophie"
-            }
-])
+        var edges = new vis.DataSet([]);
         
         var container = document.getElementById('network');
         var data = {
