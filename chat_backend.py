@@ -157,7 +157,7 @@ def get_concepts():
             concept_id = concept.get('id', '').strip() or str(i + 1)
             label = concept.get('label', '').strip()
             definition = concept.get('definition', '').strip()
-            categorie = concept.get('categorie', '').strip() or 'Autre'
+            categorie = concept.get('categorie ', '').strip() or 'Autre'
             color = CATEGORY_COLORS.get(categorie, '#97C2FC')
             
             if not label:  # Skip empty rows
