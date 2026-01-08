@@ -110,30 +110,33 @@ nodes_json = json.dumps(nodes, ensure_ascii=False, indent=12)
 edges_json = json.dumps(edges, ensure_ascii=False, indent=12)
 
 # Trouver et remplacer la section
-old_section = """        // Network data - chargé depuis MongoDB
-        var nodes = new vis.DataSet("""
-
-new_section = f"""        // Network data - chargé depuis Google Sheets
-        var nodes = new vis.DataSet("""
+marker = "        var nodes = new vis.DataSet("
 
 # Remplacer les DataSets
-if old_section in html_content:
-    # Trouver la fin des DataSets
-    start_idx = html_content.find(old_section)
+if marker in html_content:
+    # Trouver le début des nodes
+    start_idx = html_content.find(marker)
+    
+    # Trouver la fin du DataSet des edges
     edges_start = html_content.find("var edges = new vis.DataSet(", start_idx)
-    edges_end = html_content.find(");", edges_start) + 2
-    
-    # Construire le nouveau contenu
-    before = html_content[:start_idx]
-    after = html_content[edges_end:]
-    
-    new_data_section = f"""        // Network data - chargé depuis Google Sheets
+    if edges_start == -1:
+        print("❌ Erreur: var edges non trouvé")
+    else:
+        # Trouver la fin des edges (chercher ]);)
+        edges_end = html_content.find(");", edges_start) + 2
+        
+        # Construire le nouveau contenu
+        before = html_content[:start_idx]
+        after = html_content[edges_end:]
+        
+        new_data_section = f"""        // Network data - chargé depuis Google Sheets
         var nodes = new vis.DataSet({nodes_json});
         var edges = new vis.DataSet({edges_json})"""
-    
-    html_content = before + new_data_section + after
+        
+        html_content = before + new_data_section + after
+        print("✅ Données remplacées dans le HTML")
 else:
-    print("⚠️  Section à remplacer non trouvée, création manuelle...")
+    print("❌ Erreur: marker var nodes non trouvé")
 
 # Sauvegarder
 with open('index_ai_chat.html', 'w', encoding='utf-8') as f:

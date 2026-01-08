@@ -412,8 +412,651 @@
         let conversationHistory = [];
         
         // Network data
-        var nodes = new vis.DataSet([{"id": 0, "label": "Aliénation", "title": "Être aliéné, c'est ne plus s'appartenir. C'est avoir le sentiment d'être dépossédé de soi-même. \nFait de ne plus s'appartenir soi-même, d'être la propriété réelle ou\nsymbolique de quelqu'un ou de quelque chose d'autre.\nExemple : je peux être aliéné par une dépendance", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 1, "label": "Identité", "title": "Ce qui permet de reconnaître quelqu'un ou quelque chose. Selon le principe d'identité, l'identité est le fait d'être égal à soi. Une chose est toujours égale à elle-même (A=A). Il s'agit d'un principe logique qui permet de s'assurer\nqu'une chose ne désigne pas une autre chose : lorsque j'utilise le terme « arbre », c'est pour désigner la chose arbre, et non une autre chose. Ce terme est toujours valable, en ce sens que demain, le mot n'aura pas changé et désignera toujours la même chose. L'identité désigne ainsi ce qui permet de reconnaître une chose dans son unité et dans le temps. Le concept englobe l'ensemble des caractéristiques immuables (qui ne changent pas) pouvant qualifier cette chose.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 2, "label": "Émancipation", "title": "Être émancipé, c'est sentir qu'on a réussi à se libérer d'une contrainte, d'une servitude \nExemple : je peux réussir à me libérer d'une emprise", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 3, "label": "Amour", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 4, "label": "Attention", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 5, "label": "Perception", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 6, "label": "Conscience", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 7, "label": "Liberté\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 8, "label": "Autorité", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 9, "label": "Pouvoir", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 10, "label": "Communauté", "title": "Une communauté est un groupement d'individus réunis autour d'une\nculture et d'une identité communes. La communauté se distingue de la société, qui tend à encourager l'émancipation de l'individu par rapport au groupe qui peut être aliénant. Dans la communauté, c'est le commun qui prime sur l'individu : celui-ci n'est qu'une partie formant le tout, ce qui signifie qu'il y a une hiérarchie entre les membres de la communauté et la communauté elle-même.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 11, "label": "Culture", "title": "La culture est l'ensemble des connaissances et des comportements propres à une communauté humaine, à un groupe humain constitué par ses affinités.", "color": "#080d94", "font": {"color": "white"}}, {"id": 12, "label": "Inconscient", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 13, "label": "Croyance", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 14, "label": "Religion", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 15, "label": "Attention\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 16, "label": "Devoir", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 17, "label": "Morale", "title": "La morale désigne la recherche d'un idéal de conduite, qui définit des règles\ncomportementales idéales qu'il faudrait suivre, mais qui ne sont pas toujours ajustées à la réalité.", "color": "#080d94", "font": {"color": "white"}}, {"id": 18, "label": "Éthique", "title": "L'éthique désigne une branche philosophique qui cherche à connaitre et à\ndéterminer les principes régulateurs de l'action humaine. En ce sens, elle fournit des règles concrètes à suivre pour l'action.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 19, "label": "Différence", "title": "Au contraire de l'identité, la différence est ce qui permet de distinguer les\nchoses. Elle est l'exact opposé de l'identité en ce qu'elle ne rassemble pas et ne vise pas\nl'unité.", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 20, "label": "Société", "title": "La société place l'individu au centre des préoccupations. Elle forme un Tout qui est formé par la juxtaposition des individus, c'est-à-dire que les individus\nvivent les uns à côté des autres sans pour autant partager des choses communes. Les individus peuvent être distingués les uns des autres et demeurent séparés malgré leurs liens sociaux. Contrairement à la communauté, dans la société, les consciences ne sont plus agrégées les unes aux autres mais différenciées ce qui engendre l'émancipation de l'individu, qui s'accompagne du règne de l'individualisme. La société encourage alors\nl'autonomie de l'individu.", "color": "#080d94", "font": {"color": "white"}}, {"id": 21, "label": "État", "title": "Ensemble des institutions (politiques, économiques, sociales, culturelles...) qui\ngouvernent un pays sur un territoire donné. C'est un pouvoir souverain. C'est l'État qui dicte les règles pour l'ensemble des citoyens. Le pouvoir contraint les hommes à obéir aux lois qu'il édicte. ", "color": "#080d94", "font": {"color": "white"}}, {"id": 22, "label": "Liberté", "title": "État d'un individu qui n'est soumis qu'aux obligations qu'il se choisit et dont\nl'action n'est pas limitée par des contraintes externes. État de celui qui n'est pas aliéné, dont l'existence ne dépend pas d'un autre que lui.", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 23, "label": "Mémoire", "title": "Aucune info", "color": "#7c81fd", "font": {"color": "#333"}}, {"id": 24, "label": "\"Attention", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 25, "label": "Culture\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 26, "label": "Mort", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 27, "label": "Temps", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 28, "label": "Mémoire\"", "title": "Aucune info", "color": "#eea5b2", "font": {"color": "#333"}}, {"id": 29, "label": "Philosophie", "title": "Selon l'étymologie grecque, la philosophie est un désir de sagesse, entendue comme la connaissance de ce qui est ", "color": "#080d94", "font": {"color": "white"}}, {"id": 30, "label": "Vérité", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 31, "label": "Technique", "title": "Aucune info", "color": "#080d94", "font": {"color": "white"}}, {"id": 32, "label": "Travail", "title": "Aucune info", "color": "#f878cd", "font": {"color": "#333"}}, {"id": 33, "label": "Bonheur", "title": "État de satisfaction complète et durable", "color": "#f878cd", "font": {"color": "#333"}}]);
-        var edges = new vis.DataSet([{"from": 0, "to": 1}, {"from": 0, "to": 2}, {"from": 3, "to": 1}, {"from": 4, "to": 5}, {"from": 4, "to": 6}, {"from": 4, "to": 7}, {"from": 8, "to": 9}, {"from": 10, "to": 11}, {"from": 10, "to": 1}, {"from": 10, "to": 2}, {"from": 6, "to": 12}, {"from": 13, "to": 14}, {"from": 13, "to": 15}, {"from": 11, "to": 10}, {"from": 11, "to": 1}, {"from": 16, "to": 17}, {"from": 16, "to": 18}, {"from": 16, "to": 0}, {"from": 16, "to": 2}, {"from": 19, "to": 1}, {"from": 19, "to": 20}, {"from": 2, "to": 0}, {"from": 21, "to": 9}, {"from": 21, "to": 8}, {"from": 21, "to": 22}, {"from": 18, "to": 17}, {"from": 1, "to": 19}, {"from": 1, "to": 10}, {"from": 12, "to": 6}, {"from": 22, "to": 2}, {"from": 22, "to": 0}, {"from": 23, "to": 24}, {"from": 23, "to": 12}, {"from": 23, "to": 6}, {"from": 23, "to": 22}, {"from": 23, "to": 25}, {"from": 17, "to": 18}, {"from": 26, "to": 22}, {"from": 26, "to": 27}, {"from": 5, "to": 24}, {"from": 5, "to": 13}, {"from": 5, "to": 28}, {"from": 29, "to": 30}, {"from": 29, "to": 20}, {"from": 9, "to": 21}, {"from": 9, "to": 8}, {"from": 14, "to": 30}, {"from": 20, "to": 10}, {"from": 20, "to": 0}, {"from": 20, "to": 11}, {"from": 20, "to": 2}, {"from": 20, "to": 1}, {"from": 20, "to": 21}, {"from": 31, "to": 27}, {"from": 31, "to": 32}, {"from": 31, "to": 2}, {"from": 31, "to": 0}, {"from": 31, "to": 22}, {"from": 27, "to": 32}, {"from": 27, "to": 27}, {"from": 32, "to": 27}, {"from": 32, "to": 1}, {"from": 32, "to": 6}, {"from": 30, "to": 29}, {"from": 30, "to": 14}, {"from": 33, "to": 22}, {"from": 33, "to": 18}]);
+        // Network data - chargé depuis Google Sheets
+        var nodes = new vis.DataSet([
+            {
+                        "id": "1",
+                        "label": "Aliénation",
+                        "title": "Être aliéné, c’est ne plus s’appartenir. C'est avoir le sentiment d’être dépossédé de soi-même, d'être la propriété réelle ou symbolique de quelqu'un ou de quelque chose d’autre. Je peux par exemple être aliéné par une dépendance à une substance, une absence, à quelqu'un, etc.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "2",
+                        "label": "Amour",
+                        "title": "\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "3",
+                        "label": "Attention",
+                        "title": "\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "4",
+                        "label": "Autorité",
+                        "title": "\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "5",
+                        "label": "Communauté",
+                        "title": "Une communauté est un groupement d’individus réunis autour d’une culture et d’une identité communes. La communauté se distingue de la société, qui tend à encourager l’émancipation de l’individu par rapport au groupe qui peut être aliénant. Dans la communauté, c’est le commun qui prime sur l’individu : celui-ci n’est qu’une partie formant le tout, ce qui signifie qu’il y a une hiérarchie entre les membres de la communauté et la communauté elle-même.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "6",
+                        "label": "Conscience",
+                        "title": "\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "7",
+                        "label": "Croyance",
+                        "title": "\n\nCatégorie: Morale",
+                        "color": "#f878cd",
+                        "group": "Morale"
+            },
+            {
+                        "id": "8",
+                        "label": "Culture",
+                        "title": "La culture est l’ensemble des connaissances et des comportements propres à une communauté humaine, à un groupe humain constitué par ses affinités.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "9",
+                        "label": "Devoir",
+                        "title": "\n\nCatégorie: Morale",
+                        "color": "#f878cd",
+                        "group": "Morale"
+            },
+            {
+                        "id": "10",
+                        "label": "Différence",
+                        "title": "Au contraire de l’identité, la différence est ce qui permet de distinguer les choses. Elle est l’exact opposé de l’identité en ce qu’elle ne rassemble pas et ne vise pas l’unité.\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "11",
+                        "label": "Émancipation",
+                        "title": "Être émancipé, c’est sentir qu’on a réussi à se libérer d’une contrainte, d’une servitude. Je peux par exemple réussir à me libérer de l'emprise que quelqu'un avait sur moi.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "12",
+                        "label": "État",
+                        "title": "Ensemble des institutions (politiques, économiques, sociales, culturelles...) qui gouvernent un pays sur un territoire donné. C’est un pouvoir souverain. C’est l’État qui dicte les règles pour l’ensemble des citoyens. Le pouvoir contraint les hommes à obéir aux lois qu’il édicte.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "13",
+                        "label": "Éthique",
+                        "title": "L’éthique désigne une branche philosophique qui cherche à connaitre et à déterminer les principes régulateurs de l’action humaine. En ce sens, elle fournit des règles concrètes à suivre pour l’action.\n\nCatégorie: Morale",
+                        "color": "#f878cd",
+                        "group": "Morale"
+            },
+            {
+                        "id": "14",
+                        "label": "Identité",
+                        "title": "qu’une chose ne désigne pas une autre chose : lorsque j’utilise le terme « arbre », c’est pour désigner la chose arbre, et non une autre chose. Ce terme est toujours valable, en ce sens que demain, le mot n’aura pas changé et désignera toujours la même chose. L’identité désigne ainsi ce qui permet de reconnaître une chose dans son unité et dans le temps. Le concept englobe l’ensemble des caractéristiques immuables (qui ne changent pas) pouvant qualifier cette chose.\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "15",
+                        "label": "Inconscient",
+                        "title": "\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "16",
+                        "label": "Liberté",
+                        "title": "État d’un individu qui n’est soumis qu’aux obligations qu’il se choisit et dont l’action n’est pas limitée par des contraintes externes. État de celui qui n’est pas aliéné, dont l’existence ne dépend pas d’un autre que lui.\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "17",
+                        "label": "Mémoire",
+                        "title": "\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "18",
+                        "label": "Morale",
+                        "title": "La morale désigne la recherche d’un idéal de conduite, qui définit des règles comportementales idéales qu’il faudrait suivre, mais qui ne sont pas toujours ajustées à la réalité.\n\nCatégorie: Morale",
+                        "color": "#f878cd",
+                        "group": "Morale"
+            },
+            {
+                        "id": "19",
+                        "label": "Mort",
+                        "title": "\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "20",
+                        "label": "Perception",
+                        "title": "\n\nCatégorie: Cognitif",
+                        "color": "#eea5b2",
+                        "group": "Cognitif"
+            },
+            {
+                        "id": "21",
+                        "label": "Philosophie",
+                        "title": "Selon l'étymologie grecque, la philosophie est l'amour, ou plutôt le désir de la sagesse, entendue comme la prudence, la modération et la connaissance de ce qui est.\n\nCatégorie: Sciences",
+                        "color": "#e2a9f1",
+                        "group": "Sciences"
+            },
+            {
+                        "id": "22",
+                        "label": "Pouvoir",
+                        "title": "\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "23",
+                        "label": "Religion",
+                        "title": "\n\nCatégorie: Morale",
+                        "color": "#f878cd",
+                        "group": "Morale"
+            },
+            {
+                        "id": "24",
+                        "label": "Société",
+                        "title": "La société est un groupement d'individus qui tend à placer l’individu au centre des préoccupations. Elle forme un Tout qui est formé par la juxtaposition des individus, c’est-à-dire que les individus vivent les uns à côté des autres sans pour autant partager des choses communes. Les individus peuvent être distingués les uns des autres et demeurent séparés malgré leurs liens sociaux. Contrairement à la communauté, dans la société, les consciences ne sont plus agrégées les unes aux autres mais différenciées ce qui engendre l’émancipation de l’individu, qui s’accompagne du règne de l’individualisme. La société encourage alors l’autonomie de l’individu.\n\nCatégorie: Politique",
+                        "color": "#080d94",
+                        "group": "Politique"
+            },
+            {
+                        "id": "25",
+                        "label": "Technique",
+                        "title": "\n\nCatégorie: Sciences",
+                        "color": "#e2a9f1",
+                        "group": "Sciences"
+            },
+            {
+                        "id": "26",
+                        "label": "Temps",
+                        "title": "\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "27",
+                        "label": "Travail",
+                        "title": "\n\nCatégorie: Existence",
+                        "color": "#7c81fd",
+                        "group": "Existence"
+            },
+            {
+                        "id": "28",
+                        "label": "Vérité",
+                        "title": "\n\nCatégorie: Sciences",
+                        "color": "#e2a9f1",
+                        "group": "Sciences"
+            }
+]);
+        var edges = new vis.DataSet([
+            {
+                        "from": "1",
+                        "to": "11"
+            },
+            {
+                        "from": "1",
+                        "to": "12"
+            },
+            {
+                        "from": "1",
+                        "to": "18"
+            },
+            {
+                        "from": "2",
+                        "to": "3"
+            },
+            {
+                        "from": "2",
+                        "to": "10"
+            },
+            {
+                        "from": "2",
+                        "to": "14"
+            },
+            {
+                        "from": "2",
+                        "to": "16"
+            },
+            {
+                        "from": "3",
+                        "to": "2"
+            },
+            {
+                        "from": "3",
+                        "to": "20"
+            },
+            {
+                        "from": "3",
+                        "to": "17"
+            },
+            {
+                        "from": "3",
+                        "to": "6"
+            },
+            {
+                        "from": "3",
+                        "to": "16"
+            },
+            {
+                        "from": "4",
+                        "to": "12"
+            },
+            {
+                        "from": "4",
+                        "to": "22"
+            },
+            {
+                        "from": "4",
+                        "to": "16"
+            },
+            {
+                        "from": "4",
+                        "to": "24"
+            },
+            {
+                        "from": "5",
+                        "to": "24"
+            },
+            {
+                        "from": "5",
+                        "to": "14"
+            },
+            {
+                        "from": "5",
+                        "to": "10"
+            },
+            {
+                        "from": "5",
+                        "to": "8"
+            },
+            {
+                        "from": "6",
+                        "to": "15"
+            },
+            {
+                        "from": "6",
+                        "to": "18"
+            },
+            {
+                        "from": "7",
+                        "to": "23"
+            },
+            {
+                        "from": "7",
+                        "to": "3"
+            },
+            {
+                        "from": "7",
+                        "to": "20"
+            },
+            {
+                        "from": "8",
+                        "to": "5"
+            },
+            {
+                        "from": "8",
+                        "to": "24"
+            },
+            {
+                        "from": "8",
+                        "to": "14"
+            },
+            {
+                        "from": "8",
+                        "to": "10"
+            },
+            {
+                        "from": "9",
+                        "to": "12"
+            },
+            {
+                        "from": "9",
+                        "to": "18"
+            },
+            {
+                        "from": "9",
+                        "to": "13"
+            },
+            {
+                        "from": "9",
+                        "to": "23"
+            },
+            {
+                        "from": "9",
+                        "to": "19"
+            },
+            {
+                        "from": "9",
+                        "to": "16"
+            },
+            {
+                        "from": "9",
+                        "to": "11"
+            },
+            {
+                        "from": "9",
+                        "to": "1"
+            },
+            {
+                        "from": "10",
+                        "to": "14"
+            },
+            {
+                        "from": "11",
+                        "to": "1"
+            },
+            {
+                        "from": "11",
+                        "to": "16"
+            },
+            {
+                        "from": "12",
+                        "to": "4"
+            },
+            {
+                        "from": "12",
+                        "to": "22"
+            },
+            {
+                        "from": "12",
+                        "to": "16"
+            },
+            {
+                        "from": "13",
+                        "to": "18"
+            },
+            {
+                        "from": "13",
+                        "to": "19"
+            },
+            {
+                        "from": "13",
+                        "to": "16"
+            },
+            {
+                        "from": "14",
+                        "to": "27"
+            },
+            {
+                        "from": "14",
+                        "to": "10"
+            },
+            {
+                        "from": "14",
+                        "to": "8"
+            },
+            {
+                        "from": "14",
+                        "to": "5"
+            },
+            {
+                        "from": "14",
+                        "to": "24"
+            },
+            {
+                        "from": "14",
+                        "to": "13"
+            },
+            {
+                        "from": "14",
+                        "to": "19"
+            },
+            {
+                        "from": "15",
+                        "to": "6"
+            },
+            {
+                        "from": "15",
+                        "to": "17"
+            },
+            {
+                        "from": "16",
+                        "to": "27"
+            },
+            {
+                        "from": "16",
+                        "to": "24"
+            },
+            {
+                        "from": "16",
+                        "to": "3"
+            },
+            {
+                        "from": "16",
+                        "to": "11"
+            },
+            {
+                        "from": "16",
+                        "to": "1"
+            },
+            {
+                        "from": "17",
+                        "to": "1"
+            },
+            {
+                        "from": "17",
+                        "to": "3"
+            },
+            {
+                        "from": "17",
+                        "to": "15"
+            },
+            {
+                        "from": "17",
+                        "to": "6"
+            },
+            {
+                        "from": "18",
+                        "to": "13"
+            },
+            {
+                        "from": "18",
+                        "to": "23"
+            },
+            {
+                        "from": "18",
+                        "to": "16"
+            },
+            {
+                        "from": "18",
+                        "to": "11"
+            },
+            {
+                        "from": "18",
+                        "to": "1"
+            },
+            {
+                        "from": "19",
+                        "to": "13"
+            },
+            {
+                        "from": "19",
+                        "to": "18"
+            },
+            {
+                        "from": "19",
+                        "to": "10"
+            },
+            {
+                        "from": "19",
+                        "to": "14"
+            },
+            {
+                        "from": "19",
+                        "to": "16"
+            },
+            {
+                        "from": "20",
+                        "to": "3"
+            },
+            {
+                        "from": "20",
+                        "to": "7"
+            },
+            {
+                        "from": "20",
+                        "to": "6"
+            },
+            {
+                        "from": "20",
+                        "to": "15"
+            },
+            {
+                        "from": "21",
+                        "to": "3"
+            },
+            {
+                        "from": "21",
+                        "to": "12"
+            },
+            {
+                        "from": "21",
+                        "to": "28"
+            },
+            {
+                        "from": "21",
+                        "to": "24"
+            },
+            {
+                        "from": "21",
+                        "to": "10"
+            },
+            {
+                        "from": "21",
+                        "to": "2"
+            },
+            {
+                        "from": "22",
+                        "to": "4"
+            },
+            {
+                        "from": "22",
+                        "to": "12"
+            },
+            {
+                        "from": "23",
+                        "to": "4"
+            },
+            {
+                        "from": "23",
+                        "to": "18"
+            },
+            {
+                        "from": "23",
+                        "to": "19"
+            },
+            {
+                        "from": "23",
+                        "to": "16"
+            },
+            {
+                        "from": "23",
+                        "to": "1"
+            },
+            {
+                        "from": "23",
+                        "to": "5"
+            },
+            {
+                        "from": "23",
+                        "to": "24"
+            },
+            {
+                        "from": "24",
+                        "to": "4"
+            },
+            {
+                        "from": "24",
+                        "to": "12"
+            },
+            {
+                        "from": "24",
+                        "to": "5"
+            },
+            {
+                        "from": "25",
+                        "to": "27"
+            },
+            {
+                        "from": "25",
+                        "to": "11"
+            },
+            {
+                        "from": "25",
+                        "to": "1"
+            },
+            {
+                        "from": "26",
+                        "to": "27"
+            },
+            {
+                        "from": "26",
+                        "to": "1"
+            },
+            {
+                        "from": "26",
+                        "to": "16"
+            },
+            {
+                        "from": "26",
+                        "to": "24"
+            },
+            {
+                        "from": "27",
+                        "to": "4"
+            },
+            {
+                        "from": "27",
+                        "to": "1"
+            },
+            {
+                        "from": "27",
+                        "to": "11"
+            },
+            {
+                        "from": "27",
+                        "to": "25"
+            },
+            {
+                        "from": "27",
+                        "to": "26"
+            },
+            {
+                        "from": "28",
+                        "to": "4"
+            },
+            {
+                        "from": "28",
+                        "to": "16"
+            },
+            {
+                        "from": "28",
+                        "to": "21"
+            }
+])
         
         var container = document.getElementById('network');
         var data = {
