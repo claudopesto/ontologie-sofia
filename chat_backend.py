@@ -23,15 +23,10 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Configuration CORS adaptée pour production
+# Configuration CORS - permissive en développement
 CORS(app, resources={
     r"/*": {
-        "origins": [
-            "https://ontologie-sofia.vercel.app",
-            "https://*.vercel.app",
-            "http://localhost:8000",
-            "http://127.0.0.1:8000"
-        ],
+        "origins": "*",
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }
@@ -63,7 +58,7 @@ Concepts disponibles : Aliénation, Identité, Émancipation, Liberté, Sociét�
 
 Ta méthode en 4 étapes :
 1. Demande quel concept parle le plus à l'utilisateur aujourd'hui
-2. Invite à raconter une expérience vécue qui lui fait penser à ce concept
+2. Invite à raconter une expérience que l'utilisateur a vécue qui lui fait penser à ce concept
 3. Aide à analyser ce qui a été ressenti pendant cette expérience
 4. Guide vers la formulation d'une idée personnelle du concept
 
@@ -106,7 +101,7 @@ def chat():
         
         # Appel à l'API Claude
         response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
+            model="claude-3-haiku-20240307",
             max_tokens=1024,
             system=CONCEPTS_CONTEXT,
             messages=messages
