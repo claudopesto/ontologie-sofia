@@ -289,73 +289,37 @@
         
         #popup {
             position: fixed;
-            top: 80px;
-            right: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
-            border: 2px solid #7c81fd;
-            border-radius: 12px;
+            border: 1px solid black;
+            border-radius: 8px;
             padding: 20px;
             display: none;
             z-index: 1000;
-            width: 350px;
-            max-width: calc(100vw - 40px);
-            max-height: calc(100vh - 120px);
+            max-width: 90%;
+            max-height: 80vh;
             overflow-y: auto;
             word-wrap: break-word;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         }
         #popup-content {
             font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        #popup-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #7c81fd;
+            line-height: 1.5;
             margin-bottom: 15px;
-            border-bottom: 2px solid #7c81fd;
-            padding-bottom: 8px;
-        }
-        #popup-relations {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
-        }
-        #popup-relations h4 {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .relation-tag {
-            display: inline-block;
-            background: #f0f0f0;
-            padding: 5px 12px;
-            border-radius: 16px;
-            margin: 4px;
-            font-size: 0.85rem;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .relation-tag:hover {
-            background: #7c81fd;
-            color: white;
         }
         button.close-button {
             width: 100%;
-            padding: 10px;
-            background: #7c81fd;
+            padding: 12px;
+            background: #007bff;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            border-radius: 5px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background 0.2s;
         }
-        button.close-button:hover {
-            background: #6a70e5;
+        button.close-button:active {
+            background: #0056b3;
         }
         #overlay {
             position: fixed;
@@ -384,7 +348,7 @@
                 right: 15px;
             }
             #popup {
-                width: 400px;
+                max-width: 500px;
             }
             #chat-container {
                 width: 420px;
@@ -439,18 +403,13 @@
     <!-- Popup -->
     <div id="overlay" onclick="hidePopup()"></div>
     <div id="popup">
-        <div id="popup-title"></div>
-        <div id="popup-content"></div>
-        <div id="popup-relations">
-            <h4>Concepts associés</h4>
-            <div id="popup-relations-list"></div>
-        </div>
+        <p id="popup-content"></p>
         <button class="close-button" onclick="hidePopup()">Fermer</button>
     </div>
     
     <script type="text/javascript">
         // Configuration
-        const API_URL = 'https://ontologie-production.up.railway.app/chat';
+        const API_URL = 'http://127.0.0.1:5001/chat';
         let conversationHistory = [];
         
         // Network data
@@ -1240,58 +1199,9 @@
         var network = new vis.Network(container, data, options);
         
         // Popup functions
-        function showPopup(nodeLabel, definition, relatedNodes) {
-            document.getElementById('popup-title').innerText = nodeLabel;
-            document.getElementById('popup-content').innerText = definition;
-            
-            // Afficher les concepts associés
-            var relationsList = document.getElementById('popup-relations-list');
-            relationsList.innerHTML = '';
-            if (relatedNodes && relatedNodes.length > 0) {
-                relatedNodes.forEach(function(relatedLabel) {
-                    var tag = document.createElement('span');
-                    tag.className = 'relation-tag';
-                    tag.innerText = relatedLabel;
-                    tag.onclick = function() {
-                        hidePopup();
-                        // Trouver le node correspondant et afficher son popup
-                        var relatedNode = null;
-                        nodes.forEach(function(n) {
-                            if (n.label === relatedLabel) {
-                                relatedNode = n;
-                            }
-                        });
-                        if (relatedNode) {
-                            var relatedRelations = getRelatedNodes(relatedNode.id);
-                            showPopup(relatedNode.label, relatedNode.title, relatedRelations);
-                        }
-                    };
-                    relationsList.appendChild(tag);
-                });
-            } else {
-                relationsList.innerHTML = '<em style="color: #999;">Aucun concept associé</em>';
-            }
-            
+        function showPopup(content) {
+            document.getElementById('popup-content').innerText = content;
             document.getElementById('overlay').style.display = 'block';
-            document.getElementById('popup').style.display = 'block';
-        }
-        
-        function getRelatedNodes(nodeId) {
-            var relatedIds = [];
-            edges.forEach(function(edge) {
-                if (edge.from === nodeId) {
-                    relatedIds.push(edge.to);
-                }
-            });
-            var relatedLabels = [];
-            relatedIds.forEach(function(id) {
-                var node = nodes.get(id);
-                if (node) {
-                    relatedLabels.push(node.label);
-                }
-            });
-            return relatedLabels;
-        }
             document.getElementById('popup').style.display = 'block';
         }
         function hidePopup() {
@@ -1304,8 +1214,7 @@
             if (properties.nodes.length > 0) {
                 var nodeId = properties.nodes[0];
                 var node = nodes.get(nodeId);
-                var relatedNodes = getRelatedNodes(nodeId);
-                showPopup(node.label, node.title, relatedNodes);
+                showPopup(node.title);
             }
         });
         
@@ -1340,15 +1249,14 @@
             }
         }
         
-        // Auto-open chat after 5 seconds (after page load)
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var chatContainer = document.getElementById('chat-container');
-                if (!chatContainer.classList.contains('active')) {
-                    toggleChat();
-                }
-            }, 5000);
-        });
+        // Auto-open chat after 5 seconds
+        setTimeout(function() {
+            var chatContainer = document.getElementById('chat-container');
+            if (!chatContainer.classList.contains('active')) {
+                chatContainer.classList.add('active');
+                document.getElementById('chat-input').focus();
+            }
+        }, 5000);
         
         function handleKeyPress(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
