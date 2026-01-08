@@ -10,6 +10,8 @@ import os
 import sys
 from anthropic import Anthropic
 from dotenv import load_dotenv
+from pymongo import MongoClient
+from bson import ObjectId
 
 # Force UTF-8 encoding
 sys.stdout.reconfigure(encoding='utf-8')
@@ -36,6 +38,17 @@ CORS(app, resources={
 
 # Configuration de l'API Anthropic (Claude)
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+
+# Configuration MongoDB
+mongodb_uri = os.environ.get("MONGODB_URI")
+if mongodb_uri:
+    mongo_client = MongoClient(mongodb_uri)
+    db = mongo_client['ontologie_sofia']
+    concepts_collection = db['concepts']
+else:
+    mongo_client = None
+    concepts_collection = None
+    print("⚠️  MONGODB_URI n'est pas configurée - endpoint /api/concepts désactivé")
 
 # Contexte des concepts philosophiques (sera enrichi dynamiquement depuis MongoDB)
 CONCEPTS_CONTEXT = """
@@ -101,6 +114,62 @@ def chat():
     except Exception as e:
         error_msg = repr(e)  # Utiliser repr() au lieu de str() pour éviter les problèmes d'encodage
         print(f"Erreur dans /chat: {error_msg}", file=sys.stderr)
+        return jsonify({
+            'error': error_msg,
+            'success': False
+        }), 500
+
+@app.route('/api/concepts', methods=['GET'])
+def get_concepts():
+    """
+    Endpoint pour récupérer tous les concepts depuis MongoDB
+    Retourne les nœuds et les relations pour le graphe vis.js
+    """
+    try:
+        if not concepts_collection:
+            return jsonify({
+                'error': 'MongoDB non configuré',
+                'success': False
+            }), 503
+        
+        # Récupérer tous les concepts
+        concepts = list(concepts_collection.find())
+        
+        # Construire les nœuds et les arêtes pour vis.js
+        nodes = []
+        edges = []
+        
+        for concept in concepts:
+            # Créer le nœud
+            node = {
+                'id': str(concept['_id']),
+                'label': concept.get('label', 'Sans nom'),
+                'title': concept.get('definition', 'Aucune info'),
+                'color': concept.get('color', '#eea5b2'),
+                'font': {
+                    'color': concept.get('fontColor', '#333')
+                }
+            }
+            nodes.append(node)
+            
+            # Créer les arêtes (relations)
+            if 'relations' in concept and concept['relations']:
+                for relation in concept['relations']:
+                    edge = {
+                        'from': str(concept['_id']),
+                        'to': str(relation)
+                    }
+                    edges.append(edge)
+        
+        return jsonify({
+            'nodes': nodes,
+            'edges': edges,
+            'success': True
+        })
+        
+    except Exception as e:
+        error_msg = repr(e)
+        print(f"Erreur dans /api/concepts: {error_msg}", file=sys.stderr)
         return jsonify({
             'error': error_msg,
             'success': False
